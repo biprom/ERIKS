@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Kristof
+ * @author Kristof Taveirne
  *         Created on 27/08/16.
  */
 @ActiveProfiles("test")
