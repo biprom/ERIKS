@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+ </head> 
+ <body> 
+  <vaadin-panel size-full> 
+   <vaadin-vertical-layout size-full> 
+    <vaadin-panel size-full> 
+     <vaadin-css-layout style-name="root-layout form-template-dark" responsive width-full _id="root_layout"> 
+      <vaadin-label style-name="header-label" plain-text _id="billing_header_label">
+        Hardware Design 
+      </vaadin-label> 
+      <vaadin-css-layout style-name="main-content-wrapper" width-full _id="main_content_wrapper"> 
+       <vaadin-form-layout style-name="billing-formlayout" size-auto margin _id="billing_form"> 
+        <vaadin-label size-auto plain-text _id="email_header_label">
+          Select number of digital output- modules 
+        </vaadin-label> 
+        <vaadin-slider width="294px" _id="digoutSlider" :middle></vaadin-slider> 
+        <vaadin-label size-auto plain-text _id="address_label">
+          Select number of digital input- modules 
+        </vaadin-label> 
+        <vaadin-slider width="293px" _id="diginSlider"></vaadin-slider> 
+        <vaadin-label size-auto plain-text _id="address_label2">
+          Select number of analog input- modules 
+        </vaadin-label> 
+        <vaadin-horizontal-layout style-name="name-wrapper" spacing _id="name_wrapper2"> 
+         <vaadin-slider width="282px" _id="anainpSlider"></vaadin-slider> 
+        </vaadin-horizontal-layout> 
+        <vaadin-label size-auto plain-text _id="address_label3">
+          Select number of analog output- modules 
+        </vaadin-label> 
+        <vaadin-slider width="282px" _id="anaoutputSlider"></vaadin-slider> 
+        <vaadin-button icon="fonticon://FontAwesome/f06d" immediate width-full plain-text _id="configurationButton">
+          Configurate Table 
+        </vaadin-button> 
+        <vaadin-label style-name="header-label" plain-text _id="billing_header_label2">
+          Hardware I/O Names 
+        </vaadin-label> 
+        <vaadin-grid editable _id="grid"></vaadin-grid> 
+        <vaadin-button icon="fonticon://FontAwesome/f06d" immediate width-full plain-text _id="hardwareButton" :middle :center>
+          Configurate database 
+        </vaadin-button> 
+       </vaadin-form-layout> 
+      </vaadin-css-layout> 
+     </vaadin-css-layout> 
+    </vaadin-panel> 
+   </vaadin-vertical-layout> 
+  </vaadin-panel>  
+ </body>
+</html>

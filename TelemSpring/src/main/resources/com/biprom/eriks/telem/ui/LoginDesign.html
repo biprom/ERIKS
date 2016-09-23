@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+ </head> 
+ <body> 
+  <vaadin-horizontal-layout spacing size-full> 
+   <vaadin-form-layout width="300px" height="300px" margin :middle> 
+    <vaadin-label description="please give username and password" size-auto plain-text :middle :center>
+      Please Login 
+    </vaadin-label> 
+    <vaadin-text-field icon="fonticon://FontAwesome/f007" description="please give username" width-full _id="name"></vaadin-text-field> 
+    <vaadin-password-field icon="fonticon://FontAwesome/f023" description="please give password" width-full _id="password"></vaadin-password-field> 
+    <vaadin-button description="enter application" width-full plain-text _id="validateButton">
+      Validate 
+    </vaadin-button> 
+   </vaadin-form-layout> 
+   <vaadin-image source="theme://images/inlogPicture.jpg" size-full :right></vaadin-image> 
+  </vaadin-horizontal-layout>  
+ </body>
+</html>
