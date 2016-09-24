@@ -6,6 +6,7 @@ import com.biprom.eriks.telem.model.MeasuredValues;
 import com.google.gwt.thirdparty.guava.common.collect.Table;
 import com.vaadin.data.Container;
 import com.vaadin.data.Container.Indexed;
+import com.vaadin.data.Item;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanContainer;
@@ -19,6 +20,9 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupView;
 import com.vaadin.ui.UI;
+
+import java.awt.List;
+import java.util.Iterator;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +40,8 @@ public class HardwareView extends HardwareDesign implements View {
 
 	public static final double maxSliderValue = 8;
 	
-	public Container indexedContainer = new IndexedContainer();
+	BeanItemContainer<CpuConfigBean> beanItemContainer =
+		    new BeanItemContainer<CpuConfigBean>(CpuConfigBean.class);
 	
 
 	public HardwareView() {
@@ -143,26 +148,52 @@ public class HardwareView extends HardwareDesign implements View {
 				// The quickest way to confirm
 				ConfirmDialog.show(UI.getCurrent(), "Changes will have big effect on the Database, please contact the IT manager! Press cancel to undo", new ConfirmDialog.Listener() {
 
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@SuppressWarnings("unchecked")
 					@Autowired
 					@Override
-					public void onClose(ConfirmDialog arg0) {
-						ConfirmDialog dialog = new ConfirmDialog();
+					public void onClose(ConfirmDialog dialog) {
+						
 						// TODO Auto-generated method stub
 						if (dialog.isConfirmed()) {
 							// Confirmed to continue
 							// DO STUFF
-							Container beanContainerEdited = new IndexedContainer();
-							beanContainerEdited  = (IndexedContainer) grid.getContainerDataSource();
+							beanItemContainer =  (BeanItemContainer<CpuConfigBean>) grid.getContainerDataSource();
+							CpuConfigBean cpuBean = new CpuConfigBean();
+							for( Iterator<CpuConfigBean> i = beanItemContainer.getItemIds().iterator(); i.hasNext();){
+								
+								
+								//get the current item identifier , which is an Integer
+								
+								CpuConfigBean iid=  i.next();
+						
+								
+								//now get the actual item from the container
+								
+								Item item = beanItemContainer.getItem(iid);
+								System.out.println("iid = "+ item.toString());
+								
+								System.out.println("properety = "+ item.getItemProperty(iid));
+								//cpuBean.setCardNumber((String)item.getItemProperty("cardNumber").getValue()) ;   
+								//cpuBean.setIoName((String)item.getItemProperty("ioName").getValue()) ; 
+								//cpuBean.setIoNumber((String)item.getItemProperty("ioNumber").getValue()) ; 
+							}
+						
+							//reposi.save(cpuBean);
 							
-							CpuConfigBean bean = new CpuConfigBean();
-							bean.setCardNumber("woord1");
-							bean.setIoName("woord2");
-							bean.setIoNumber("woord3");
-							
-							
-							final CpuConfigBean save = reposi.save(bean);
-							Assert.assertNotNull(save.getId());
-							
+//							CpuConfigBean bean = new CpuConfigBean();
+//							bean.setCardNumber("test1");
+//							bean.setIoName("test2");
+//							bean.setIoNumber("test3");
+////							
+//							
+//							CpuConfigBean save = reposi.save(bean);							
+//							Assert.assertNotNull(save.getId());
+//							
 							
 																		
 							
@@ -178,58 +209,57 @@ public class HardwareView extends HardwareDesign implements View {
 
 			}
 		});
-		
+
 		configurationButton.addClickListener(new Button.ClickListener() {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				
-				indexedContainer.addContainerProperty("name", String.class, "defaultValue");
-				indexedContainer.addContainerProperty("output", String.class, "defaultoutput");
-				
 				for (double i = 0; i < digoutSlider.getValue(); i++) {
 					
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 2", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 3", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 4", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 5", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 6", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 7", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital out card " + i, "output 8", "name"));
+					
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 1", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 2", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 3", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 4", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 5", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 6", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 7", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital out card " + i, "output 8", "name"));
 					
 				}
 				
 				for (double i = 0; i < diginSlider.getValue(); i++) {
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 1", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 2", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 3", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 4", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 5", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 6", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 7", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("digital in card " + i, "input 8", "name"));
-//					
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 1", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 2", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 3", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 4", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 5", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 6", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 7", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("digital in card " + i, "input 8", "name"));
+					
 				}
 				
 				for (double i = 0; i < anainpSlider.getValue(); i++) {
-//					cpuConfBeans.addBean(new CpuConfigBean("analog in card " + i, "input 1", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("analog in card " + i, "input 2", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("analog in card " + i, "input 3", "name"));
-//					cpuConfBeans.addBean(new CpuConfigBean("analog in card " + i, "input 4", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("analog in card " + i, "input 1", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("analog in card " + i, "input 2", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("analog in card " + i, "input 3", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("analog in card " + i, "input 4", "name"));
 //					
 
 				}
 				
 				for (double i = 0; i < anaoutputSlider.getValue(); i++) {
-//					cpuConfBeans.addBean(new CpuConfigBean("analog out card " + i, "output 1", "name"));
+					beanItemContainer.addBean(new CpuConfigBean("analog out card " + i, "output 1", "name"));
 //					
 
 
 				}
 				
-				grid.setContainerDataSource((Indexed) indexedContainer);
-				
+				grid.setContainerDataSource(beanItemContainer);
+		
 				
 			}
 		});

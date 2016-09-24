@@ -13,6 +13,10 @@ public class CpuConfigBean {
 	@Id
 	private String id;
 	
+	
+
+
+
 	@Indexed
 	private String cardNumber;
 	private String ioNumber;
@@ -83,11 +87,17 @@ public class CpuConfigBean {
 	}
 
 
-
-
-	public Object getId() {
-		
+	public String getId() {
 		return id;
 	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+
 
 }
