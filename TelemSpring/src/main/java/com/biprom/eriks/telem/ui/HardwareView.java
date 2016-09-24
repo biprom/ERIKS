@@ -16,6 +16,7 @@ import com.vaadin.ui.UI;
 
 import java.util.Iterator;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
@@ -184,8 +185,8 @@ public class HardwareView extends HardwareDesign implements View {
 								
 								System.out.println("params are written in bean");
 								
-								
-								
+								CpuConfigBean test = reposi.save(cpuBean);
+								Assert.assertNotNull(test.getId());
 								
 								System.out.println("params are written to database");
 							}
