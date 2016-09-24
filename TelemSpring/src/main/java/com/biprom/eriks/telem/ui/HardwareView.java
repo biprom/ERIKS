@@ -2,35 +2,31 @@ package com.biprom.eriks.telem.ui;
 
 import com.biprom.eriks.telem.dao.CpuConfigRepository;
 import com.biprom.eriks.telem.model.CpuConfigBean;
-import com.biprom.eriks.telem.model.MeasuredValues;
-import com.google.gwt.thirdparty.guava.common.collect.Table;
-import com.vaadin.data.Container;
-import com.vaadin.data.Container.Indexed;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
-import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.PopupView;
 import com.vaadin.ui.UI;
 
-import java.awt.List;
 import java.util.Iterator;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 @SpringView(name = HardwareView.VIEW_NAME)
 public class HardwareView extends HardwareDesign implements View {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	CpuConfigRepository reposi;
 
@@ -163,7 +159,7 @@ public class HardwareView extends HardwareDesign implements View {
 							// Confirmed to continue
 							// DO STUFF
 							beanItemContainer =  (BeanItemContainer<CpuConfigBean>) grid.getContainerDataSource();
-							CpuConfigBean cpuBean = new CpuConfigBean();
+							CpuConfigBean cpuBean = new CpuConfigBean("init","init","init");
 							for( Iterator<CpuConfigBean> i = beanItemContainer.getItemIds().iterator(); i.hasNext();){
 								
 								
@@ -177,25 +173,23 @@ public class HardwareView extends HardwareDesign implements View {
 								Item item = beanItemContainer.getItem(iid);
 								System.out.println("iid = "+ item.toString());
 								
-								System.out.println("properety = "+ item.getItemProperty(iid));
-								//cpuBean.setCardNumber((String)item.getItemProperty("cardNumber").getValue()) ;   
-								//cpuBean.setIoName((String)item.getItemProperty("ioName").getValue()) ; 
-								//cpuBean.setIoNumber((String)item.getItemProperty("ioNumber").getValue()) ; 
+								System.out.println("cardnumber = "+ item.getItemProperty("cardNumber").getValue());
+								System.out.println("ioname = "+ item.getItemProperty("ioName").getValue());
+								System.out.println("ionumber = "+ item.getItemProperty("ioNumber").getValue());
+								
+								
+								cpuBean.setCardNumber((String)item.getItemProperty("cardNumber").getValue()) ;   
+								cpuBean.setIoName((String)item.getItemProperty("ioName").getValue()) ; 
+								cpuBean.setIoNumber((String)item.getItemProperty("ioNumber").getValue()) ; 
+								
+								System.out.println("params are written in bean");
+								
+								
+								
+								
+								System.out.println("params are written to database");
 							}
 						
-							//reposi.save(cpuBean);
-							
-//							CpuConfigBean bean = new CpuConfigBean();
-//							bean.setCardNumber("test1");
-//							bean.setIoName("test2");
-//							bean.setIoNumber("test3");
-////							
-//							
-//							CpuConfigBean save = reposi.save(bean);							
-//							Assert.assertNotNull(save.getId());
-//							
-							
-																		
 							
 						} else {
 							// User did not confirm
