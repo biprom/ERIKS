@@ -30,6 +30,8 @@ public class HardwareView extends HardwareDesign implements View {
 
 	@Autowired
 	CpuConfigRepository reposi;
+	
+	CpuConfigBean test;
 
 	public static final String VIEW_NAME = "hardware";
 
@@ -45,13 +47,7 @@ public class HardwareView extends HardwareDesign implements View {
 
 
 		//Set up grid
-		// TODO Auto-generated method stub
-
-		//grid.addColumn("IO- Card");
-		//grid.addColumn("IO- Number");
-		//grid.addColumn("IO- Name");
-
-
+		
 		//set scope of sliders from 0 tot 8
 		digoutSlider.setMin(minSliderValue);
 		digoutSlider.setMax(maxSliderValue);
@@ -181,12 +177,11 @@ public class HardwareView extends HardwareDesign implements View {
 								
 								cpuBean.setCardNumber((String)item.getItemProperty("cardNumber").getValue()) ;   
 								cpuBean.setIoName((String)item.getItemProperty("ioName").getValue()) ; 
-								cpuBean.setIoNumber((String)item.getItemProperty("ioNumber").getValue()) ; 
-								
-								System.out.println("params are written in bean");
-								
-								CpuConfigBean test = reposi.save(cpuBean);
-								Assert.assertNotNull(test.getId());
+								cpuBean.setIoNumber((String)item.getItemProperty("ioNumber").getValue()) ;
+						
+									reposi.deleteAll();
+									//test = reposi.save(cpuBean);
+									//Assert.assertNotNull(test.getId());
 								
 								System.out.println("params are written to database");
 							}
