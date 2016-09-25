@@ -27,7 +27,7 @@ public class HardwareView extends HardwareDesign implements View {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	CpuConfigRepository reposi;
+	CpuConfigRepository cpuConfigRepository;
 
 	public static final String VIEW_NAME = "hardware";
 
@@ -169,7 +169,7 @@ public class HardwareView extends HardwareDesign implements View {
 
 									System.out.println("params are written in bean");
 
-									CpuConfigBean test = reposi.save(iid);
+									CpuConfigBean test = cpuConfigRepository.save(iid);
 
 									System.out.println("params are written to database. (ID: " + test.getId() + ")");
 								}
