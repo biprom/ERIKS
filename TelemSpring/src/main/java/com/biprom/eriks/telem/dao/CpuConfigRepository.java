@@ -7,6 +7,7 @@ import com.biprom.eriks.telem.model.CpuConfigBean;
 import com.biprom.eriks.telem.model.Person;
 
 @Repository(value = "cpuConfigRepository")
+
 public interface CpuConfigRepository extends PagingAndSortingRepository<CpuConfigBean, String> {
 	
 	CpuConfigRepository findByIoName(String loginName);

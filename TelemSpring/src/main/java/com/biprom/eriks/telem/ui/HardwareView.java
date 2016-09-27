@@ -14,6 +14,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import java.util.Collection;
@@ -168,7 +169,8 @@ public class HardwareView extends HardwareDesign implements View {
 
 
 									System.out.println("params are written in bean");
-
+									
+									
 									CpuConfigBean test = cpuConfigRepository.save(iid);
 
 									System.out.println("params are written to database. (ID: " + test.getId() + ")");
