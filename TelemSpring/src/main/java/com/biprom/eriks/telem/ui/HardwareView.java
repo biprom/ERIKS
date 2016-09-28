@@ -170,7 +170,8 @@ public class HardwareView extends HardwareDesign implements View {
 
 
 									System.out.println("params are written in bean");
-
+									
+									
 									CpuConfigBean test = cpuConfigRepository.save(iid);
 
 									System.out.println("params are written to database. (ID: " + test.getId() + ")");
