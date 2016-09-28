@@ -14,6 +14,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class HardwareView extends HardwareDesign implements View {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
+	@Qualifier("cpuConfigRepository")
 	CpuConfigRepository cpuConfigRepository;
 
 	public static final String VIEW_NAME = "hardware";
