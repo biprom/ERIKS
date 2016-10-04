@@ -33,9 +33,9 @@ public class MainUI extends UI {
 //
 		navigator = new Navigator(this, this);
 		navigator.addProvider(viewProvider);
-
-//		navigator.addView(LoginView.VIEW_NAME, new LoginView());
-//		navigator.addView(MainView.VIEW_NAME, MainView.class);
+//
+//		navigator.addView(LoginView.VIEW_NAME, viewProvider.getView(LoginView.VIEW_NAME));
+//		navigator.addView(MainView.VIEW_NAME, viewProvider.getView(MainView.VIEW_NAME));
 
 
        /* //set and reset digital output
