@@ -75,13 +75,12 @@
             <systemPath>${project.basedir}/WebContent/WEB-INF/lib/confirmdialog-2.1.3.jar</systemPath>
         </dependency>
 		
-		<dependency>
-   		<groupId>com.vaadin.addon</groupId>
-   		<artifactId>vaadin-charts</artifactId>
-   		<version>3.0.0</version>
-		</dependency>
+		
             
-
+		<dependency>
+    	<groupId>com.vaadin</groupId>
+    	<artifactId>vaadin-client-compiled</artifactId>
+		</dependency>
 
 
     </dependencies>
@@ -89,7 +88,7 @@
     <dependencyManagement>
         <dependencies>
         
-    	<dependency>
+    		<dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>7.6.3</version>
@@ -97,7 +96,6 @@
                 <scope>import</scope>
             </dependency>
         
-            
             
         </dependencies>
     </dependencyManagement>

@@ -28,8 +28,9 @@ public class HardwareView extends HardwareDesign implements View {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
+	@Qualifier("cpuConfigRepository")
 	CpuConfigRepository cpuConfigRepository;
-
+ 
 	public static final String VIEW_NAME = "hardware";
 
 	public static final double minSliderValue = 0;
