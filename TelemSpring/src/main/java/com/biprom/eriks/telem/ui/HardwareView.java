@@ -30,7 +30,7 @@ public class HardwareView extends HardwareDesign implements View {
 	@Autowired
 	@Qualifier("cpuConfigRepository")
 	CpuConfigRepository cpuConfigRepository;
-
+ 
 	public static final String VIEW_NAME = "hardware";
 
 	public static final double minSliderValue = 0;
