@@ -183,23 +183,8 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="false">$USER_HOME$/.subversion</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Maven: ch.qos.logback:logback-classic:1.1.7">
@@ -301,6 +286,28 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-gpio-extension/1.1/pi4j-gpio-extension-1.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: com.vaadin.addon:vaadin-charts-model:3.0.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts-model/3.0.0/vaadin-charts-model-3.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts-model/3.0.0/vaadin-charts-model-3.0.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts-model/3.0.0/vaadin-charts-model-3.0.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.vaadin.addon:vaadin-charts:3.0.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts/3.0.0/vaadin-charts-3.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts/3.0.0/vaadin-charts-3.0.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/addon/vaadin-charts/3.0.0/vaadin-charts-3.0.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.vaadin.external.flute:flute:1.3.0.gg2">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/flute/flute/1.3.0.gg2/flute-1.3.0.gg2.jar!/" />
@@ -312,37 +319,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/flute/flute/1.3.0.gg2/flute-1.3.0.gg2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.vaadin.external.google:guava:16.0.1.vaadin1">
+    <library name="Maven: com.vaadin:vaadin-client-compiled:7.7.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/google/guava/16.0.1.vaadin1/guava-16.0.1.vaadin1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.7.3/vaadin-client-compiled-7.7.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/google/guava/16.0.1.vaadin1/guava-16.0.1.vaadin1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.7.3/vaadin-client-compiled-7.7.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/google/guava/16.0.1.vaadin1/guava-16.0.1.vaadin1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.vaadin.external.streamhtmlparser:streamhtmlparser-jsilver:0.0.10.vaadin1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/streamhtmlparser/streamhtmlparser-jsilver/0.0.10.vaadin1/streamhtmlparser-jsilver-0.0.10.vaadin1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/streamhtmlparser/streamhtmlparser-jsilver/0.0.10.vaadin1/streamhtmlparser-jsilver-0.0.10.vaadin1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/external/streamhtmlparser/streamhtmlparser-jsilver/0.0.10.vaadin1/streamhtmlparser-jsilver-0.0.10.vaadin1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.vaadin:vaadin-client-compiled:7.6.3">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.6.3/vaadin-client-compiled-7.6.3.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.6.3/vaadin-client-compiled-7.6.3-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.6.3/vaadin-client-compiled-7.6.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-client-compiled/7.7.3/vaadin-client-compiled-7.7.3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13">
@@ -356,26 +341,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-sass-compiler/0.9.13/vaadin-sass-compiler-0.9.13-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.vaadin:vaadin-server:7.6.3">
+    <library name="Maven: com.vaadin:vaadin-server:7.7.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.6.3/vaadin-server-7.6.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.7.3/vaadin-server-7.7.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.6.3/vaadin-server-7.6.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.7.3/vaadin-server-7.7.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.6.3/vaadin-server-7.6.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-server/7.7.3/vaadin-server-7.7.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.vaadin:vaadin-shared:7.6.3">
+    <library name="Maven: com.vaadin:vaadin-shared:7.7.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.6.3/vaadin-shared-7.6.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.7.3/vaadin-shared-7.7.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.6.3/vaadin-shared-7.6.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.7.3/vaadin-shared-7.7.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.6.3/vaadin-shared-7.6.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-shared/7.7.3/vaadin-shared-7.7.3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.vaadin:vaadin-spring-boot-starter:1.0.0">
@@ -411,26 +396,26 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-spring/1.0.0/vaadin-spring-1.0.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.vaadin:vaadin-themes:7.6.3">
+    <library name="Maven: com.vaadin:vaadin-themes:7.7.3">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.6.3/vaadin-themes-7.6.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.7.3/vaadin-themes-7.7.3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.6.3/vaadin-themes-7.6.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.7.3/vaadin-themes-7.7.3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.6.3/vaadin-themes-7.6.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/vaadin/vaadin-themes/7.7.3/vaadin-themes-7.7.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.yahoo.platform.yui:yuicompressor:2.4.8">
+    <library name="Maven: commons-io:commons-io:1.4">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/yahoo/platform/yui/yuicompressor/2.4.8/yuicompressor-2.4.8.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/yahoo/platform/yui/yuicompressor/2.4.8/yuicompressor-2.4.8-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/yahoo/platform/yui/yuicompressor/2.4.8/yuicompressor-2.4.8-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.validation:validation-api:1.1.0.Final">
@@ -455,6 +440,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: net.jpountz.lz4:lz4:1.3.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: net.minidev:accessors-smart:1.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/net/minidev/accessors-smart/1.1/accessors-smart-1.1.jar!/" />
@@ -475,6 +471,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/net/minidev/json-smart/2.2.1/json-smart-2.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.apache.kafka:kafka-clients:0.10.0.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/kafka/kafka-clients/0.10.0.1/kafka-clients-0.10.0.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.4">
@@ -508,6 +515,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.4/tomcat-embed-websocket-8.5.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.aspectj:aspectjweaver:1.8.9">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjweaver/1.8.9/aspectjweaver-1.8.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjweaver/1.8.9/aspectjweaver-1.8.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjweaver/1.8.9/aspectjweaver-1.8.9-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.assertj:assertj-core:2.5.0">
@@ -719,6 +737,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/1.4.0.RELEASE/spring-boot-autoconfigure-1.4.0.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.springframework.boot:spring-boot-devtools:1.4.0.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/1.4.0.RELEASE/spring-boot-devtools-1.4.0.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/1.4.0.RELEASE/spring-boot-devtools-1.4.0.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/1.4.0.RELEASE/spring-boot-devtools-1.4.0.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.springframework.boot:spring-boot-starter-data-mongodb:1.4.0.RELEASE">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-data-mongodb/1.4.0.RELEASE/spring-boot-starter-data-mongodb-1.4.0.RELEASE.jar!/" />
@@ -840,6 +869,28 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-mongodb/1.9.2.RELEASE/spring-data-mongodb-1.9.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.springframework.kafka:spring-kafka:1.1.1.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/kafka/spring-kafka/1.1.1.RELEASE/spring-kafka-1.1.1.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/kafka/spring-kafka/1.1.1.RELEASE/spring-kafka-1.1.1.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/kafka/spring-kafka/1.1.1.RELEASE/spring-kafka-1.1.1.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.springframework.retry:spring-retry:1.1.3.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/retry/spring-retry/1.1.3.RELEASE/spring-retry-1.1.3.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/retry/spring-retry/1.1.3.RELEASE/spring-retry-1.1.3.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/retry/spring-retry/1.1.3.RELEASE/spring-retry-1.1.3.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.springframework:spring-aop:4.3.2.RELEASE">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.2.RELEASE/spring-aop-4.3.2.RELEASE.jar!/" />
@@ -849,6 +900,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.2.RELEASE/spring-aop-4.3.2.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.springframework:spring-aspects:4.1.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/4.1.5.RELEASE/spring-aspects-4.1.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/4.1.5.RELEASE/spring-aspects-4.1.5.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aspects/4.1.5.RELEASE/spring-aspects-4.1.5.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-beans:4.3.2.RELEASE">
@@ -893,6 +955,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-expression/4.3.2.RELEASE/spring-expression-4.3.2.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.springframework:spring-messaging:4.3.2.RELEASE">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.3.2.RELEASE/spring-messaging-4.3.2.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.3.2.RELEASE/spring-messaging-4.3.2.RELEASE-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-messaging/4.3.2.RELEASE/spring-messaging-4.3.2.RELEASE-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-test:4.3.2.RELEASE">
@@ -950,6 +1023,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/w3c/css/sac/1.3/sac-1.3-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.xerial.snappy:snappy-java:1.1.2.6">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.yaml:snakeyaml:1.17">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar!/" />
@@ -961,16 +1045,32 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.17/snakeyaml-1.17-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: rhino:js:1.7R2">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R2/js-1.7R2.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R2/js-1.7R2-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/rhino/js/1.7R2/js-1.7R2-sources.jar!/" />
-      </SOURCES>
-    </library>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
