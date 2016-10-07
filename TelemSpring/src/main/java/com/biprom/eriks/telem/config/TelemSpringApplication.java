@@ -37,7 +37,7 @@ public class TelemSpringApplication {
 	@Bean
 	public Map<String, Object> producerConfigs() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "104.155.116.177:9092");
+		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "104.199.13.181:9092");
 		props.put(ProducerConfig.CLIENT_ID_CONFIG, "client-1");
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

@@ -38,6 +38,15 @@ public class Measurement {
 
 	private Double m;
 
+	public Measurement(Date d, MeasurementType t, Double m) {
+		this.d = d;
+		this.t = t;
+		this.m = m;
+	}
+
+	public Measurement() {
+	}
+
 	public Date getD() {
 		return d;
 	}
