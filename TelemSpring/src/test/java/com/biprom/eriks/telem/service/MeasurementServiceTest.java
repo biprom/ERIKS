@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 /**
  * @author Kristof
  *         Created on 27/09/16.
@@ -25,6 +27,9 @@ public class MeasurementServiceTest {
 	@Test
 	public void pointcutTest() {
 		final Measurement m = new Measurement();
+		m.setTime(new Date());
+		m.setValue(41d);
+		m.setType(Measurement.MeasurementType.OIL_TEMP_IN);
 		measurementService.store(m);
 	}
 

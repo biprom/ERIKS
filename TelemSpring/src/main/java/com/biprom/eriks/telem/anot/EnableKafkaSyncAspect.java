@@ -1,5 +1,7 @@
 package com.biprom.eriks.telem.anot;
 
+import com.biprom.eriks.telem.dao.MeasurementRepository;
+import com.biprom.eriks.telem.model.Measurement;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +18,39 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Aspect
 @Component
 public class EnableKafkaSyncAspect {
+
 	@Autowired
-	KafkaTemplate<Integer, String> kafkaTemplate;
+	KafkaTemplate<String, Measurement> kafkaTemplate;
+
+	@Autowired
+	MeasurementRepository measurementRepository;
 
 
 	@AfterReturning(
-			pointcut = "@annotation(EnableKafkaSync) && execution(* *(..))",
+			pointcut = "@annotation(EnableKafkaSync)",
 			returning = "retVal")
 	public void myFirstPointcut(Object retVal) {
-		System.out.println("sending the measurement");
-		final ListenableFuture<SendResult<Integer, String>> future = kafkaTemplate.send("eriks", 0, "1234");
-		future.addCallback(new ListenableFutureCallback<SendResult<Integer, String>>() {
-			@Override
-			public void onFailure(Throwable throwable) {
-				System.out.println("onFailure");
-			}
 
-			@Override
-			public void onSuccess(SendResult<Integer, String> integerStringSendResult) {
-				System.out.println("onSuccess");
-			}
-		});
+		if (retVal instanceof Measurement) {
+			final Measurement m = (Measurement) retVal;
+			final ListenableFuture<SendResult<String, Measurement>> future = kafkaTemplate.send("eriks", m);
+
+			future.addCallback(new ListenableFutureCallback<SendResult<String, Measurement>>() {
+				@Override
+				public void onSuccess(SendResult<String, Measurement> stringMeasurementSendResult) {
+					measurementRepository.updateSynchronised(m.getId(), Boolean.TRUE);
+				}
+
+				@Override
+				public void onFailure(Throwable throwable) {
+					measurementRepository.updateSynchronised(m.getId(), Boolean.FALSE);
+				}
+			});
+
+
+		}
+
+
 	}
 
 }

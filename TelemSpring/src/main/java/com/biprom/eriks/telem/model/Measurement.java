@@ -1,8 +1,10 @@
 package com.biprom.eriks.telem.model;
 
+import com.google.gson.annotations.Expose;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -27,47 +29,73 @@ public class Measurement {
 	}
 
 	@Id
+	@Expose
 	private String id;
 
 	@Indexed
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	private Date d;
+	@Field("d")
+	@Expose
+	private Date time;
 
 	@Indexed
-	private MeasurementType t;
+	@Field("t")
+	@Expose
+	private MeasurementType type;
 
-	private Double m;
+	@Field("v")
+	@Expose
+	private Double value;
+
+	@Field("s")
+	private Boolean synched;
 
 	public Measurement(Date d, MeasurementType t, Double m) {
-		this.d = d;
-		this.t = t;
-		this.m = m;
+		this.time = d;
+		this.type = t;
+		this.value = m;
 	}
 
 	public Measurement() {
 	}
 
-	public Date getD() {
-		return d;
+	public String getId() {
+		return id;
 	}
 
-	public void setD(Date d) {
-		this.d = d;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public MeasurementType getT() {
-		return t;
+	public Date getTime() {
+		return time;
 	}
 
-	public void setT(MeasurementType t) {
-		this.t = t;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
-	public Double getM() {
-		return m;
+	public MeasurementType getType() {
+		return type;
 	}
 
-	public void setM(Double m) {
-		this.m = m;
+	public void setType(MeasurementType type) {
+		this.type = type;
+	}
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	public Boolean getSynched() {
+		return synched;
+	}
+
+	public void setSynched(Boolean synched) {
+		this.synched = synched;
 	}
 }
