@@ -1,7 +1,7 @@
 package com.biprom.eriks.telem.anot;
 
-import com.biprom.eriks.telem.dao.MeasurementRepository;
-import com.biprom.eriks.telem.model.Measurement;
+import com.biprom.eriks.telem.dao.SensorReadingRepository;
+import com.biprom.eriks.telem.model.SensorReading;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class EnableKafkaSyncAspect {
 
 	@Autowired
-	KafkaTemplate<String, Measurement> kafkaTemplate;
+	KafkaTemplate<String, SensorReading> kafkaTemplate;
 
 	@Autowired
-	MeasurementRepository measurementRepository;
+	SensorReadingRepository sensorReadingRepository;
 
 
 	@AfterReturning(
@@ -31,19 +31,19 @@ public class EnableKafkaSyncAspect {
 			returning = "retVal")
 	public void myFirstPointcut(Object retVal) {
 
-		if (retVal instanceof Measurement) {
-			final Measurement m = (Measurement) retVal;
-			final ListenableFuture<SendResult<String, Measurement>> future = kafkaTemplate.send("eriks", m);
+		if (retVal instanceof SensorReading) {
+			final SensorReading m = (SensorReading) retVal;
+			final ListenableFuture<SendResult<String, SensorReading>> future = kafkaTemplate.send("eriks", m);
 
-			future.addCallback(new ListenableFutureCallback<SendResult<String, Measurement>>() {
+			future.addCallback(new ListenableFutureCallback<SendResult<String, SensorReading>>() {
 				@Override
-				public void onSuccess(SendResult<String, Measurement> stringMeasurementSendResult) {
-					measurementRepository.updateSynchronised(m.getId(), Boolean.TRUE);
+				public void onSuccess(SendResult<String, SensorReading> stringMeasurementSendResult) {
+					sensorReadingRepository.updateSynchronised(m.getId(), Boolean.TRUE);
 				}
 
 				@Override
 				public void onFailure(Throwable throwable) {
-					measurementRepository.updateSynchronised(m.getId(), Boolean.FALSE);
+					sensorReadingRepository.updateSynchronised(m.getId(), Boolean.FALSE);
 				}
 			});
 

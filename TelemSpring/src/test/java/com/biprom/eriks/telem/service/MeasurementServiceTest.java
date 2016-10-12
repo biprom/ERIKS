@@ -2,7 +2,7 @@ package com.biprom.eriks.telem.service;
 
 import com.biprom.eriks.telem.config.MongoConfiguration;
 import com.biprom.eriks.telem.config.TelemSpringApplication;
-import com.biprom.eriks.telem.model.Measurement;
+import com.biprom.eriks.telem.model.SensorReading;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ import java.util.Date;
 public class MeasurementServiceTest {
 
 	@Autowired
-	MeasurementService measurementService;
+	SensorService measurementService;
 
 	@Test
 	public void pointcutTest() {
-		final Measurement m = new Measurement();
+		final SensorReading m = new SensorReading();
 		m.setTime(new Date());
 		m.setValue(41d);
-		m.setType(Measurement.MeasurementType.OIL_TEMP_IN);
+		m.setType("OIL_TEMP_IN");
 		measurementService.store(m);
 	}
 

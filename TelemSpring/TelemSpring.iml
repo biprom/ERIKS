@@ -75,6 +75,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: caplogic:mappedbus:0.5">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/WebContent/WEB-INF/lib/mappedbus-0.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: com.vaadin.addon:vaadin-charts:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.addon:vaadin-charts-model:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.1" level="project" />

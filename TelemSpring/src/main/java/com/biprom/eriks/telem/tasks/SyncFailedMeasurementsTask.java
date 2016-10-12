@@ -1,7 +1,7 @@
 package com.biprom.eriks.telem.tasks;
 
-import com.biprom.eriks.telem.model.Measurement;
-import com.biprom.eriks.telem.service.MeasurementService;
+import com.biprom.eriks.telem.model.SensorReading;
+import com.biprom.eriks.telem.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class SyncFailedMeasurementsTask {
 
 	@Autowired
-	MeasurementService measurementService;
+	SensorService measurementService;
 
 
 	/**
@@ -22,7 +22,7 @@ public class SyncFailedMeasurementsTask {
 	 */
 	@Scheduled(cron = "*/30 * * * * *")
 	public void retrySync() {
-		for (Measurement m : measurementService.findUnsynchedMeasurements()) {
+		for (SensorReading m : measurementService.findUnsynchedMeasurements()) {
 			measurementService.sync(m);
 		}
 	}

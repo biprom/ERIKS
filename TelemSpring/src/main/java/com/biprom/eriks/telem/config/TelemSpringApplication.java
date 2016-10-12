@@ -1,6 +1,6 @@
 package com.biprom.eriks.telem.config;
 
-import com.biprom.eriks.telem.model.Measurement;
+import com.biprom.eriks.telem.model.SensorReading;
 import com.biprom.eriks.telem.util.serde.MeasurementSerializer;
 import com.vaadin.spring.annotation.EnableVaadin;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -33,7 +33,7 @@ public class TelemSpringApplication {
 
 
 	@Bean
-	public ProducerFactory<String, Measurement> producerFactory() {
+	public ProducerFactory<String, SensorReading> producerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
 	}
 
@@ -48,7 +48,7 @@ public class TelemSpringApplication {
 	}
 
 	@Bean
-	public KafkaTemplate<String, Measurement> kafkaTemplate() {
+	public KafkaTemplate<String, SensorReading> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 
 	}
