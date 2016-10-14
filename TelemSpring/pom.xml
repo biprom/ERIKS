@@ -6,7 +6,7 @@
     <groupId>com.biprom</groupId>
     <artifactId>TelemSpring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>TelemSpring</name>
     <description>Demo project for Spring Boot</description>
@@ -72,6 +72,14 @@
             <version>2.1.3</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/WebContent/WEB-INF/lib/confirmdialog-2.1.3.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>caplogic</groupId>
+            <artifactId>mappedbus</artifactId>
+            <version>0.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/mappedbus-0.5.jar</systemPath>
         </dependency>
 
         <dependency>
