@@ -4,6 +4,7 @@ import com.biprom.eriks.telem.model.SensorReading;
 import com.biprom.eriks.telem.service.SensorService;
 import io.mappedbus.MappedBusReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,9 @@ import java.io.IOException;
 @Component
 public class SensorReader {
 
+	@Value("${sensorfile}")
+	private String sensorFile;
+
 	@Autowired
 	SensorService sensorService;
 
@@ -23,7 +27,7 @@ public class SensorReader {
 	@Scheduled(cron = "*/10 * * * * *")
 	public void readSensorData() {
 		// Change this to a memory file
-		MappedBusReader reader = new MappedBusReader("/Users/Kristof/sensor", 50000L, 64);
+		MappedBusReader reader = new MappedBusReader(sensorFile, 50000L, 64);
 		try {
 			reader.open();
 			while (reader.next()) {
@@ -34,6 +38,7 @@ public class SensorReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }

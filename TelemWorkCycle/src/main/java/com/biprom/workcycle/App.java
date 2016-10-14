@@ -5,7 +5,26 @@ package com.biprom.workcycle;
  */
 public class App {
 	public static void main(String[] args) {
+
+
+		/**
+		 * Start workcycle THREAD
+		 */
 		//new WorkCycle().start();
-		new Sensor().start();
+
+
+		/**
+		 * Start communication to TelemSpring
+		 */
+		String sensorFile = "/dev/shm/sensor";
+		if (args.length == 1) {
+			final String arg = args[0];
+			if (arg.startsWith("--sensorfile=")) {
+				sensorFile = arg.substring(13);
+				System.out.println("Using sensorfile: " + sensorFile);
+			}
+			new Sensor(sensorFile).start();
+		}
 	}
+
 }

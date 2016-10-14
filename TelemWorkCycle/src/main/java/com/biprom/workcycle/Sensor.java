@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class Sensor extends Thread {
 
-	private static final String SHARED_MEMORY_FILE = "/Users/Kristof/sensor"; //"/dev/shm/sensor";
+
+	private String sensorFile;
 
 	/**
 	 * Read sensor data every 10 seconds.
@@ -47,9 +48,9 @@ public class Sensor extends Thread {
 	 */
 	MappedBusWriter writer;
 
-	public Sensor() {
-
-		writer = new MappedBusWriter(SHARED_MEMORY_FILE, BUFFER_SIZE, 64, false);
+	public Sensor(String sensorFile) {
+		this.sensorFile = sensorFile;
+		writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, false);
 		try {
 			writer.open();
 		} catch (IOException e) {
@@ -58,6 +59,7 @@ public class Sensor extends Thread {
 	}
 
 	public void run() {
+		long test = 0;
 		while (!Thread.currentThread().isInterrupted()) {
 			try {
 
@@ -77,14 +79,14 @@ public class Sensor extends Thread {
 
 
 				// FF wat cijfertjes om te kunnen testen.
-				final long s0 = 100;
-				final long s1 = 101;
-				final long s2 = 102;
-				final long s3 = 103;
-				final long s4 = 104;
-				final long s5 = 105;
-				final long s6 = 106;
-				final long s7 = 107;
+				final long s0 = test++;
+				final long s1 = test++;
+				final long s2 = test++;
+				final long s3 = test++;
+				final long s4 = test++;
+				final long s5 = test++;
+				final long s6 = test++;
+				final long s7 = test++;
 
 
 				// TODO: BRAM, ook dit is helemaal NIET juist hé. Hier koppel ik de uitgelezen waarde aan een effectief TYPE reading.
@@ -107,7 +109,7 @@ public class Sensor extends Thread {
 					} catch (EOFException e) {
 						try {
 							writer.close();
-							writer = new MappedBusWriter(SHARED_MEMORY_FILE, BUFFER_SIZE, 64, false);
+							writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, false);
 							writer.open();
 							writer.write(reading);
 						} catch (IOException e1) {

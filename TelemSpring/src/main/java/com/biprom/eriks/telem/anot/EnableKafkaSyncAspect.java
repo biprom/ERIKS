@@ -5,6 +5,7 @@ import com.biprom.eriks.telem.model.SensorReading;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,9 @@ public class EnableKafkaSyncAspect {
 	@Autowired
 	SensorReadingRepository sensorReadingRepository;
 
+	@Value("${client}")
+	private String clientId;
+
 
 	@AfterReturning(
 			pointcut = "@annotation(EnableKafkaSync)",
@@ -33,6 +37,7 @@ public class EnableKafkaSyncAspect {
 
 		if (retVal instanceof SensorReading) {
 			final SensorReading m = (SensorReading) retVal;
+			m.setSource(clientId);
 
 			final ListenableFuture<SendResult<String, SensorReading>> future = kafkaTemplate.send("eriks", m);
 

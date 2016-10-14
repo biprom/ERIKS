@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import io.mappedbus.MappedBusMessage;
 import io.mappedbus.MemoryMappedFile;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -40,6 +41,9 @@ public class SensorReading implements MappedBusMessage {
 
 	@Field("s")
 	private Boolean synched;
+
+	@Transient
+	private String source;
 
 	public SensorReading(Date d, String t, Double m) {
 		this.time = d;
@@ -90,6 +94,13 @@ public class SensorReading implements MappedBusMessage {
 		this.synched = synched;
 	}
 
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
 
 	public void write(MemoryMappedFile mem, long pos) {
 		mem.putLong(pos, time.getTime());

@@ -5,6 +5,7 @@ import com.biprom.eriks.telem.util.serde.MeasurementSerializer;
 import com.vaadin.spring.annotation.EnableVaadin;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,13 @@ import java.util.Map;
 @EnableScheduling
 public class TelemSpringApplication {
 
+
+	@Value("${client}")
+	private String clientId;
+
+	@Value("${sensorfile}")
+	private String sensorFile;
+
 	public static void main(String[] args) {
 		SpringApplication.run(TelemSpringApplication.class, args);
 	}
@@ -41,7 +49,7 @@ public class TelemSpringApplication {
 	public Map<String, Object> producerConfigs() {
 		Map<String, Object> props = new HashMap<>();
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "eriks.liquinno.com:9092");
-		props.put(ProducerConfig.CLIENT_ID_CONFIG, "client-1");
+		props.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MeasurementSerializer.class);
 		return props;
@@ -50,7 +58,6 @@ public class TelemSpringApplication {
 	@Bean
 	public KafkaTemplate<String, SensorReading> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
-
 	}
 
 
