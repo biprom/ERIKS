@@ -20,9 +20,9 @@ public class Sensor extends Thread {
 	/**
 	 * Read sensor data every 10 seconds.
 	 */
-	private static final int SENSOR_FREQUENCY = 1000;//10 * 1000;
+	private static final int SENSOR_FREQUENCY = 10 * 1000;
 
-	private static final long BUFFER_SIZE = 50000L;
+	private static final long BUFFER_SIZE = 500000L;
 
 	public enum SensorReadingType {
 		OIL_TEMP_IN,                    // temperatuur olie ingang

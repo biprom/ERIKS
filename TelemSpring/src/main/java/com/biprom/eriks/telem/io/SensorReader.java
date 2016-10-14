@@ -27,7 +27,7 @@ public class SensorReader {
 	@Scheduled(cron = "*/10 * * * * *")
 	public void readSensorData() {
 		// Change this to a memory file
-		MappedBusReader reader = new MappedBusReader(sensorFile, 50000L, 64);
+		MappedBusReader reader = new MappedBusReader(sensorFile, 500000L, 64);
 		try {
 			reader.open();
 			while (reader.next()) {
