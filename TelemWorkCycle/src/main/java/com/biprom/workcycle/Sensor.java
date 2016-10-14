@@ -2,6 +2,7 @@ package com.biprom.workcycle;
 
 import io.mappedbus.MappedBusWriter;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,10 +14,14 @@ import java.util.List;
  */
 public class Sensor extends Thread {
 
+	private static final String SHARED_MEMORY_FILE = "/Users/Kristof/sensor"; //"/dev/shm/sensor";
+
 	/**
 	 * Read sensor data every 10 seconds.
 	 */
-	private static final int SENSOR_FREQUENCY = 10 * 1000;
+	private static final int SENSOR_FREQUENCY = 1000;//10 * 1000;
+
+	private static final long BUFFER_SIZE = 50000L;
 
 	public enum SensorReadingType {
 		OIL_TEMP_IN,                    // temperatuur olie ingang
@@ -44,8 +49,7 @@ public class Sensor extends Thread {
 
 	public Sensor() {
 
-		//writer = new MappedBusWriter("/dev/shm/sensor", 50000L, 64, false);
-		writer = new MappedBusWriter("/Users/Kristof/sensor", 50000L, 64, false);
+		writer = new MappedBusWriter(SHARED_MEMORY_FILE, BUFFER_SIZE, 64, false);
 		try {
 			writer.open();
 		} catch (IOException e) {
@@ -98,18 +102,27 @@ public class Sensor extends Thread {
 
 
 				for (SensorReading reading : readings) {
-					writer.write(reading);
+					try {
+						writer.write(reading);
+					} catch (EOFException e) {
+						try {
+							writer.close();
+							writer = new MappedBusWriter(SHARED_MEMORY_FILE, BUFFER_SIZE, 64, false);
+							writer.open();
+							writer.write(reading);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+
+					}
 				}
 
 				Thread.sleep(SENSOR_FREQUENCY);
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
-//			} catch (I2CFactory.UnsupportedBusNumberException e) {
-//				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
+
 	}
 
 

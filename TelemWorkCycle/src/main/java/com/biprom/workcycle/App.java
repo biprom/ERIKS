@@ -5,7 +5,7 @@ package com.biprom.workcycle;
  */
 public class App {
 	public static void main(String[] args) {
-		new WorkCycle().start();
+		//new WorkCycle().start();
 		new Sensor().start();
 	}
 }

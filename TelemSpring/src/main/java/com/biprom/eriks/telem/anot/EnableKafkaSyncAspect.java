@@ -33,6 +33,7 @@ public class EnableKafkaSyncAspect {
 
 		if (retVal instanceof SensorReading) {
 			final SensorReading m = (SensorReading) retVal;
+
 			final ListenableFuture<SendResult<String, SensorReading>> future = kafkaTemplate.send("eriks", m);
 
 			future.addCallback(new ListenableFutureCallback<SendResult<String, SensorReading>>() {
