@@ -17,7 +17,7 @@ import java.util.Date;
  * @author Kristof
  *         Created on 06/10/16.
  */
-@Document(collection = "reading")
+@Document(collection = "sensors")
 public class SensorReading implements MappedBusMessage {
 
 	@Id
@@ -43,6 +43,7 @@ public class SensorReading implements MappedBusMessage {
 	private Boolean synched;
 
 	@Transient
+	@Expose
 	private String source;
 
 	public SensorReading(Date d, String t, Double m) {

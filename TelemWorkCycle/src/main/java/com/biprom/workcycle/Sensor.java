@@ -50,7 +50,7 @@ public class Sensor extends Thread {
 
 	public Sensor(String sensorFile) {
 		this.sensorFile = sensorFile;
-		writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, false);
+		writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, true);
 		try {
 			writer.open();
 		} catch (IOException e) {
