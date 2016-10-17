@@ -10,8 +10,7 @@ public class App {
 		/**
 		 * Start workcycle THREAD
 		 */
-		//new WorkCycle().start();
-
+		new WorkCycle().start();
 
 		/**
 		 * Start communication to TelemSpring

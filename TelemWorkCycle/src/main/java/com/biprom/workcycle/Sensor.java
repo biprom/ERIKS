@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
+
 /**
  * @author Kristof
  *         Created on 12/10/16.
@@ -25,22 +27,27 @@ public class Sensor extends Thread {
 	private static final long BUFFER_SIZE = 500000L;
 
 	public enum SensorReadingType {
-		OIL_TEMP_IN,                    // temperatuur olie ingang
-		OIL_PRESSURE_IN,                // druk olie ingang
-		OIL_TEMP_BEFORE_FILTERS,        // temperatuur olie voor filters
-		FLOW_BEFORE_FILTERS,            // flowmeter voor filters
-		OIL_PRESSURE_BEFORE_FILTERS,    // druk olie voor filters
-		OIL_PRESSURE_AFTER_FILTERS,     // druk olie na filters
-		FLOW_DRAIN,                     // flowmeter leegloop
-		PARTICLE_COUNT,                 // deeltjesteller
-		RELATIVE_HUMIDITY               // relatieve vochtigheid
+		FLOW_FILTERUNIT,                    
+		FLOW_FILTER_DISCHARGE,                
+		PRESSURE_FILTERUNIT,        
+		TEMPERATURE_AFTER_PUMP,           
+		OIL_TEMPEARTURE_INPUT,    
+		OIL_PRESSURE_INPUT,    
+		PRESSURE_BEFORE_FILTERS,                    
+		PRESSURE_AFTER_FILTERS,                
+		NAS1,
+		NAS2,
+		NAS3,
+		RH_OIL// 
 	}
 
 	/**
 	 * Reading out sensor data from this card
 	 * TODO Probably not correct
 	 */
-//	ADC_PI_MCP analog_input_card_1 = new ADC_PI_MCP();
+	ADC_PI_MCP analog_input_card_1_1 = new ADC_PI_MCP();
+	ADC_PI_MCP analog_input_card_2_1 = new ADC_PI_MCP();
+	ADC_PI_MCP analog_input_card_3_1 = new ADC_PI_MCP();
 
 	/**
 	 * Een memory mapped file voor communicatie tussen processen.
@@ -67,39 +74,49 @@ public class Sensor extends Thread {
 				Date now = new Date();
 
 
-				//TODO: BRAM, Zou verwachten hier doubles te krijgen, waarschijnlijk lees ik hier helemaal geen sensor data uit.
-//				final long s0 = analog_input_card_1.read_raw(0X6C, 0, 0, 0, 0);
-//				final long s1 = analog_input_card_1.read_raw(0X6C, 1, 0, 0, 0);
-//				final long s2 = analog_input_card_1.read_raw(0X6C, 2, 0, 0, 0);
-//				final long s3 = analog_input_card_1.read_raw(0X6C, 3, 0, 0, 0);
-//				final long s4 = analog_input_card_1.read_raw(0X6D, 0, 0, 0, 0);
-//				final long s5 = analog_input_card_1.read_raw(0X6D, 1, 0, 0, 0);
-//				final long s6 = analog_input_card_1.read_raw(0X6D, 2, 0, 0, 0);
-//				final long s7 = analog_input_card_1.read_raw(0X6D, 3, 0, 0, 0);
+				try{
+				
+				final long s0 = analog_input_card_1_1.read_raw(0X6C, 0, 1, 0, 0); //flow 18
+				final long s1 =  analog_input_card_1_1.read_raw(0X6C, 1, 1, 0, 0);//flow 29
+				final long s2 = (long) (analog_input_card_1_1.read_raw(0X6C, 2, 1, 0, 0)/48.375); //eds13
+				final long s3 = (long) (analog_input_card_1_1.read_raw(0X6C, 3, 1, 0, 0)/35.30); //temp olie na pomp						
+				final long s4 = (long) (analog_input_card_2_1.read_raw(0X6D, 0, 1, 0, 0)/35.30); //temp 03
+				final long s5 = (long)((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 1, 0, 1, 0)-2.4333);  //sensor 4
+				final long s6 = (long)((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 2, 0, 1, 0)-2.4333);  //sensor 13
+				final long s7 = (long)((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 3, 0, 1, 0)-2.4333);  //sensor 20
+				final long s8 = (long) (analog_input_card_3_1.read_raw(0X6E, 0, 1, 0, 0)/146.214);  //stauf nas1
+				final long s9 = (long) (analog_input_card_3_1.read_raw(0X6E, 1, 1, 0, 0)/155.636);  //stauf nas 2
+				final long s10 = (long) (analog_input_card_3_1.read_raw(0X6E, 2, 1, 0, 0)/158.9);	//stauf nas 3
+				final long s11 = (long) (analog_input_card_3_1.read_raw(0X6E, 3, 1, 0, 0)/28.431);	//RHOlie
+				
+				}
+				
+				catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedBusNumberException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
-
-				// FF wat cijfertjes om te kunnen testen.
-				final long s0 = test++;
-				final long s1 = test++;
-				final long s2 = test++;
-				final long s3 = test++;
-				final long s4 = test++;
-				final long s5 = test++;
-				final long s6 = test++;
-				final long s7 = test++;
-
+				
+						
 
 				// TODO: BRAM, ook dit is helemaal NIET juist hé. Hier koppel ik de uitgelezen waarde aan een effectief TYPE reading.
 				List<SensorReading> readings =
 						Arrays.asList(
-								new SensorReading(now, SensorReadingType.OIL_TEMP_IN.name(), (double) s0),
-								new SensorReading(now, SensorReadingType.OIL_PRESSURE_IN.name(), (double) s1),
-								new SensorReading(now, SensorReadingType.OIL_TEMP_BEFORE_FILTERS.name(), (double) s2),
-								new SensorReading(now, SensorReadingType.FLOW_BEFORE_FILTERS.name(), (double) s3),
-								new SensorReading(now, SensorReadingType.OIL_PRESSURE_BEFORE_FILTERS.name(), (double) s4),
-								new SensorReading(now, SensorReadingType.OIL_PRESSURE_AFTER_FILTERS.name(), (double) s5),
-								new SensorReading(now, SensorReadingType.FLOW_DRAIN.name(), (double) s6),
-								new SensorReading(now, SensorReadingType.PARTICLE_COUNT.name(), (double) s7)
+								new SensorReading(now, SensorReadingType.FLOW_FILTERUNIT.name(), (double) s0),
+								new SensorReading(now, SensorReadingType.FLOW_FILTER_DISCHARGE.name(), (double) s1),
+								new SensorReading(now, SensorReadingType.PRESSURE_FILTERUNIT.name(), (double) s2),
+								new SensorReading(now, SensorReadingType.TEMPERATURE_AFTER_PUMP.name(), (double) s3),
+								new SensorReading(now, SensorReadingType.OIL_TEMPEARTURE_INPUT.name(), (double) s4),
+								new SensorReading(now, SensorReadingType.OIL_PRESSURE_INPUT.name(), (double) s5),
+								new SensorReading(now, SensorReadingType.PRESSURE_BEFORE_FILTERS.name(), (double) s6),
+								new SensorReading(now, SensorReadingType.PRESSURE_AFTER_FILTERS.name(), (double) s7),
+								new SensorReading(now, SensorReadingType.NAS1.name(), (double) s8),
+								new SensorReading(now, SensorReadingType.NAS2.name(), (double) s9),
+								new SensorReading(now, SensorReadingType.NAS3.name(), (double) s10),
+								new SensorReading(now, SensorReadingType.RH_OIL.name(), (double) s11)
 						);
 
 
