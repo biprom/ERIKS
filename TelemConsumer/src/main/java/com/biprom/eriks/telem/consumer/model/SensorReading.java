@@ -2,6 +2,7 @@ package com.biprom.eriks.telem.consumer.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author Kristof
  *         Created on 14/10/16.
  */
+@Document(collection = "sensors")
 public class SensorReading {
 
 	@Id

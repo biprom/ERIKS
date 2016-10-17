@@ -1,6 +1,8 @@
 package com.biprom.eriks.telem.consumer.service;
 
+import com.biprom.eriks.telem.consumer.dao.SensorReadingRepository;
 import com.biprom.eriks.telem.consumer.model.SensorReading;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SensorReadingsListener {
 
+	@Autowired
+	SensorReadingRepository sensorReadingRepository;
+
 	@KafkaListener(topics = "eriks")
 	public void listener(SensorReading reading) {
-		System.out.println(reading.getValue());
+		sensorReadingRepository.save(reading);
 	}
 }
