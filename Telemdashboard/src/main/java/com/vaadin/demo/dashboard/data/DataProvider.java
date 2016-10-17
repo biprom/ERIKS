@@ -27,7 +27,7 @@ public interface DataProvider {
      *            Movie identifier.
      * @return A Collection of daily revenues for the movie.
      */
-    //Collection<MeasuredValues> getDailyRevenuesByMovie(long id);
+    //Collection<MeasuredValues> fetchParaMeasuredValues(long id);
 
     /**
      * @return Total revenues for each listed movie.
@@ -76,7 +76,7 @@ public interface DataProvider {
      */
     Collection<Transaction> getTransactionsBetween(Date startDate, Date endDate);
 
-	Collection<Parameters> getParameters();
+	Collection<String> getParameters();
 
-	Collection<MeasuredValues> getDailyRevenuesByMovie(String par);
+	Collection<MeasuredValues> fetchParaMeasuredValues(String par);
 }
