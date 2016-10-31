@@ -43,7 +43,7 @@ public class Sensor extends Thread {
 
 	public Sensor(String sensorFile) {
 		this.sensorFile = sensorFile;
-		writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, true);
+		writer = new MappedBusWriter(sensorFile, BUFFER_SIZE, 64, false);
 		try {
 			writer.open();
 		} catch (IOException e) {
@@ -121,8 +121,10 @@ public class Sensor extends Thread {
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			} catch (IOException e2) {
+				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			} catch (UnsupportedBusNumberException e2) {
+				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 		}

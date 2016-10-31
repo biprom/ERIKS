@@ -52,9 +52,9 @@ public class WorkCycle extends Thread {
 	boolean koeling_motor_9 = false; // wordt geschakeld tijdens opstart
 
 	// opstart op temperatuur brengen olie
-	long temp_olie; // gemeten temperatuur olie
-	long temp_olie_min = 18; // minimum waarde olie
-	long temp_olie_max = 20; // maximum waarde olie
+	double temp_olie; // gemeten temperatuur olie
+	double temp_olie_min = 18; // minimum waarde olie
+	double temp_olie_max = 20; // maximum waarde olie
 	boolean verwarming_olie = false; // tweefasig olieverwarmer
 
 	// leeglopen draintank
@@ -74,10 +74,10 @@ public class WorkCycle extends Thread {
 	boolean klep_19; // bekrachtigen tijdens filterwissel
 
 	// alarmen + uitschakelen als
-	long sensor4; // <0.2 bar op ingang of > 1.9 bar
+	double sensor4; // <0.2 bar op ingang of > 1.9 bar
 
-	long sensor20; // differentiaaldruk samen met sensor 13
-	long sensor13; // >=4bar (fout 5) druk op filterelement te hoog / >= 3bar
+	double sensor20; // differentiaaldruk samen met sensor 13
+	double sensor13; // >=4bar (fout 5) druk op filterelement te hoog / >= 3bar
 					// druk op filterelement waarschuwing
 					// -0.1 bar onderdruk op filterelement drainventing open
 					// (fout 8)
@@ -98,18 +98,18 @@ public class WorkCycle extends Thread {
 				System.out.println("flow 29 : "+analog_input_card_1.read_raw(0X6C, 1, 1, 0, 0));
 				System.out.println("eds 13 : "+(analog_input_card_1.read_raw(0X6C, 2, 1, 0, 0)/48.375));
 				
-				temp_olie = (long) (analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0)/35.30);
+				temp_olie = (analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0)/35.30);
 				System.out.println("temp olie na pomp: "+ temp_olie);
 				
 				System.out.println("temp 03 : "+(analog_input_card_2.read_raw(0X6D, 0, 1, 0, 0)/35.30));
 				
-				sensor4 = (long)((0.62/186)*analog_input_card_2.read_raw(0X6D, 1, 0, 1, 0)-2.4333);
+				sensor4 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 1, 0, 1, 0)-2.4333);
 				System.out.println("sensor 04 : " + sensor4);
 				
-				sensor13 = (long)((0.62/186)*analog_input_card_2.read_raw(0X6D, 2, 0, 1, 0)-2.4333);
+				sensor13 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 2, 0, 1, 0)-2.4333);
 				System.out.println("P 13 : "+ sensor13 );
 				
-				sensor20 = (long)((0.62/186)*analog_input_card_2.read_raw(0X6D, 3, 0, 1, 0)-2.4333);
+				sensor20 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 3, 0, 1, 0)-2.4333);
 				System.out.println("P 20 : "+ sensor20);
 				
 				System.out.println("stauf : NAS 1 : "+analog_input_card_3.read_raw(0X6E, 0, 1, 0, 0)/146.214); 
@@ -158,7 +158,7 @@ public class WorkCycle extends Thread {
 				
 				//leegpompen hoog pijlglas
 
-				if (niv_hoog_peilglas == true) {
+				if (niv_hoog_peilstok == true) {
 					System.out.println("LEEGPOMPEN START PARALLELWERKING");
 					leegpompen_Start();				
 					
@@ -169,22 +169,22 @@ public class WorkCycle extends Thread {
 				
 				//leeglopen hoog pijlstok, zal leegpompten met machine uit te schakelen (auto opstart !!!)
 				
-				if (niv_hoog_peilstok == true) {
-					System.out.println(" pijlstok 1 te hoog");								
-					standby();
-					
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					leegpompen_Start();
-						
-				}
+//				if (niv_hoog_peilstok == true) {
+//					System.out.println(" pijlstok 1 te hoog");								
+//					standby();
+//					
+//					try {
+//						Thread.sleep(1000);
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					
+//					leegpompen_Start();
+//						
+//				}
 				
-				if (niv_laag_peilglas == true) {
+				if (niv_laag_peilglas == false) {
 					System.out.println("LEEGPOMPEN STOP");
 					leegpompen_Stop();				
 					
@@ -286,6 +286,10 @@ public class WorkCycle extends Thread {
 				error = Error.OK;
 			}
 			
+			if(reset_drukknop == true){
+				//probeer error te resetten
+				error = Error.OK;
+			}
 			
 			
 			setOutputsToVariables();
@@ -448,8 +452,8 @@ public class WorkCycle extends Thread {
 		reset_drukknop = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_02).getValue() != 0);
 		niv_hoog_peilstok = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_03).getValue() != 0);
 		System.out.println("niveau pijlstok hoog : " + niv_hoog_peilstok);
-		niv_laag_peilglas = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_04).getValue() != 0);
-		niv_hoog_peilglas = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_05).getValue() != 0);
+		niv_hoog_peilglas = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_04).getValue() != 0);
+		niv_laag_peilglas = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_05).getValue() != 0);
 		System.out.println("niveau pijglas laag : " + niv_laag_peilglas);
 	//	aan_uit_knop = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_06).getValue() != 0);
 		aan_uit_knop = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_07).getValue() != 0);
