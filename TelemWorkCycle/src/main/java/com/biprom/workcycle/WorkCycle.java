@@ -53,13 +53,14 @@ public class WorkCycle extends Thread {
 
 	// opstart op temperatuur brengen olie
 	double temp_olie; // gemeten temperatuur olie
-	double temp_olie_min = 18; // minimum waarde olie
-	double temp_olie_max = 20; // maximum waarde olie
+	double temp_olie_min = 20; // minimum waarde olie
+	double temp_olie_max = 40; // maximum waarde olie
 	boolean verwarming_olie = false; // tweefasig olieverwarmer
 
 	// leeglopen draintank
 	boolean niv_hoog_peilglas; // maximaal niveau peilglas
-	boolean schakelklep_draintank_30; // actie ifv peilglas
+	boolean schakelklep_draintank_open; // actie ifv peilglas
+	boolean schakelklep_draintank_sluiten;
 	boolean niv_laag_peilglas;
 	boolean leegpompmotor_26; // actie ifv peilglas en bij filterwissel
 	boolean niv_hoog_peilstok;
@@ -72,6 +73,9 @@ public class WorkCycle extends Thread {
 	boolean sensor_29_flowmeter; // na aantal seconden motor 26 afslaan spoel 19
 									// en 23 onbekrachtigd worden
 	boolean klep_19; // bekrachtigen tijdens filterwissel
+	
+	boolean schakelklep_drainfilter_open;
+	boolean schakelklep_drainfilter_sluiten;
 
 	// alarmen + uitschakelen als
 	double sensor4; // <0.2 bar op ingang of > 1.9 bar
@@ -81,6 +85,7 @@ public class WorkCycle extends Thread {
 					// druk op filterelement waarschuwing
 					// -0.1 bar onderdruk op filterelement drainventing open
 					// (fout 8)
+	
 
 
 	public void run() {
@@ -96,15 +101,15 @@ public class WorkCycle extends Thread {
 				
 				System.out.println("flow 18 : "+analog_input_card_1.read_raw(0X6C, 0, 1, 0, 0)); 
 				System.out.println("flow 29 : "+analog_input_card_1.read_raw(0X6C, 1, 1, 0, 0));
-				System.out.println("eds 13 : "+(analog_input_card_1.read_raw(0X6C, 2, 1, 0, 0)/48.375));
+				System.out.println("eds 13 : "+((0.19*(analog_input_card_1.read_raw(0X6C, 2, 0, 1, 0)-736))));
 				
-				temp_olie = (analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0)/35.30);
-				System.out.println("temp olie na pomp: "+ temp_olie);
+				temp_olie = (((analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0))-365.04)/19.16);
+				System.out.println("temp olie aanzuig: "+ temp_olie);
 				
-				System.out.println("temp 03 : "+(analog_input_card_2.read_raw(0X6D, 0, 1, 0, 0)/35.30));
+				System.out.println("temp 03 : "+(((analog_input_card_2.read_raw(0X6D, 0, 1, 0, 0))-365.04)/19.16));
 				
 				sensor4 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 1, 0, 1, 0)-2.4333);
-				System.out.println("sensor 04 : " + sensor4);
+				System.out.println("aanzuigdruk- sensor 04 : " + sensor4);
 				
 				sensor13 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 2, 0, 1, 0)-2.4333);
 				System.out.println("P 13 : "+ sensor13 );
@@ -112,9 +117,9 @@ public class WorkCycle extends Thread {
 				sensor20 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 3, 0, 1, 0)-2.4333);
 				System.out.println("P 20 : "+ sensor20);
 				
-				System.out.println("stauf : NAS 1 : "+analog_input_card_3.read_raw(0X6E, 0, 1, 0, 0)/146.214); 
-				System.out.println("stauf : NAS 2 : "+analog_input_card_3.read_raw(0X6E, 1, 1, 0, 0)/155.636);
-				System.out.println("stauf : NAS 3 : "+analog_input_card_3.read_raw(0X6E, 2, 1, 0, 0)/158.9);
+				System.out.println("stauf : NAS 1 : "+analog_input_card_3.read_raw(0X6E, 0, 1, 0, 0)); 
+				System.out.println("stauf : NAS 2 : "+analog_input_card_3.read_raw(0X6E, 1, 1, 0, 0));
+				System.out.println("stauf : NAS 3 : "+analog_input_card_3.read_raw(0X6E, 2, 1, 0, 0));
 				System.out.println("RH Olie : "+analog_input_card_3.read_raw(0X6E, 3, 1, 0, 0)/28.431);
 				
 
@@ -252,13 +257,7 @@ public class WorkCycle extends Thread {
 				status = Status.STANDBY;
 			}
 
-			if (temp_olie < 15) {
-				System.out.println("ERROR : temp olie < 15°C");
-				error = Error.SENSOR3_LAAG;
-				
-				standby();
-				status = Status.STANDBY;
-			}
+			
 
 			if (temp_olie > 80) {
 				System.out.println("ERROR : temp olie > 80°C");
@@ -366,7 +365,8 @@ public class WorkCycle extends Thread {
 		// schakelklep 30 en motor 26
 		// regelen tussen deze waarden
 		roodDrainnage = true;
-		schakelklep_draintank_30 = true;
+		schakelklep_draintank_open = true;
+		schakelklep_draintank_sluiten = false;
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -382,7 +382,8 @@ public class WorkCycle extends Thread {
 	private void leegpompen_Stop() {
 		// schakelklep 30 en motor 26
 		// regelen tussen deze waarden
-		schakelklep_draintank_30 = false;
+		schakelklep_draintank_open = false;
+		schakelklep_draintank_sluiten = true;
 		leegpompmotor_26 = false;
 		roodDrainnage = false;
 		System.out.println("functie leegpompen gestopt");
@@ -433,7 +434,8 @@ public class WorkCycle extends Thread {
 		 klepNC28 = false; // wordt geschakeld tijdens opstart
 		 koeling_motor_9 = false; // wordt geschakeld tijdens opstart
 		 verwarming_olie = false; // tweefasig olieverwarmer
-		 schakelklep_draintank_30 = false; // actie ifv peilglas
+		 schakelklep_draintank_open = false;
+		 schakelklep_draintank_sluiten = true;
 		 leegpompmotor_26 = false; // actie ifv peilglas en bij filterwissel
 		 klep_23 = false; 
 		 sensor_29_flowmeter = false; // na aantal seconden motor 26 afslaan spoel 19
@@ -463,10 +465,10 @@ public class WorkCycle extends Thread {
 	digital_output_card_1.d1.setState(!koeling_motor_9);
 	digital_output_card_1.d2.setState(!koeling_motor_9);
 	digital_output_card_1.d3.setState(!leegpompmotor_26);
-	digital_output_card_1.d4.setState(!schakelklep_draintank_30);
-	digital_output_card_1.d5.setState(!klepNC17);
-	digital_output_card_1.d6.setState(!klepNC17);
-	digital_output_card_1.d7.setState(!klep_23);
+	digital_output_card_1.d4.setState(!schakelklep_draintank_open);
+	digital_output_card_1.d5.setState(!schakelklep_draintank_sluiten);
+	digital_output_card_1.d6.setState(!schakelklep_drainfilter_open);
+	digital_output_card_1.d7.setState(!schakelklep_drainfilter_sluiten);
 	digital_output_card_1.d8.setState(!klepNC28);
 	
 	digital_output_card_2.d1.setState(!klep_19);

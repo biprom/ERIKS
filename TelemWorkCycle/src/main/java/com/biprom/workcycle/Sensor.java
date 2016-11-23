@@ -60,22 +60,21 @@ public class Sensor extends Thread {
 				// raspberry. Anders zijn die metingen waardeloos!
 				Date now = new Date();
 
-				final double s0 = analog_input_card_1_1.read_raw(0X6C, 0, 1, 0, 0); // flow
-																					// 18
-				final double s1 = analog_input_card_1_1.read_raw(0X6C, 1, 1, 0, 0);// flow
-																					// 29
-				final double s2 = (analog_input_card_1_1.read_raw(0X6C, 2, 1, 0, 0) / 48.375); // eds13
-				final double s3 = (analog_input_card_1_1.read_raw(0X6C, 3, 1, 0, 0) / 35.30); // temp
-																								// olie
-																								// na
-																								// pomp
-				final double s4 = (analog_input_card_2_1.read_raw(0X6D, 0, 1, 0, 0) / 35.30); // temp
+				final double s0 = analog_input_card_1_1.read_raw(0X6C, 0, 1, 0, 0); // flow 18
+																	
+				final double s1 = analog_input_card_1_1.read_raw(0X6C, 1, 1, 0, 0);// flow 29
+																	
+				final double s2 = ((0.19*(analog_input_card_1_1.read_raw(0X6C, 2, 0, 1, 0)-736))); // eds13
+				
+				final double s3 = (((analog_input_card_2_1.read_raw(0X6D, 0, 1, 0, 0))-365.04)/19.16); // temp olie na pomp
+																								
+				final double s4 = (((analog_input_card_1_1.read_raw(0X6C, 3, 1, 0, 0))-365.04)/19.16); // temp olie input
 																								// 03
-				final double s5 = ((0.62 / 186) * analog_input_card_2_1.read_raw(0X6D, 1, 0, 1, 0) - 2.4333); // sensor
+				final double s5 = ((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 1, 0, 1, 0)-2.4333); // sensor
 																												// 4
-				final double s6 = ((0.62 / 186) * analog_input_card_2_1.read_raw(0X6D, 2, 0, 1, 0) - 2.4333); // sensor
+				final double s6 = ((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 2, 0, 1, 0)-2.4333); // sensor
 																												// 13
-				final double s7 = ((0.62 / 186) * analog_input_card_2_1.read_raw(0X6D, 3, 0, 1, 0) - 2.4333); // sensor
+				final double s7 = ((0.62/186)*analog_input_card_2_1.read_raw(0X6D, 3, 0, 1, 0)-2.4333); // sensor
 																												// 20
 				final double s8 = (analog_input_card_3_1.read_raw(0X6E, 0, 1, 0, 0) / 146.214); // stauf
 																								// nas1
@@ -87,6 +86,23 @@ public class Sensor extends Thread {
 																								// 3
 				final double s11 = (analog_input_card_3_1.read_raw(0X6E, 3, 1, 0, 0) / 28.431); // RHOlie
 
+				
+				
+//				final double s0 = 1; // flow					// 18
+//				final double s1 = 2;// flow
+//				final double s2 = 3; // eds13
+//				final double s3 = 4; // temp
+//				final double s4 = 5; // temp
+//				final double s5 = 6; // sensor
+//				final double s6 = 7; // sensor
+//				final double s7 = 8; // sensor
+//				final double s8 = 9; // stauf
+//				final double s9 = 10; // stauf
+//				final double s10 = 11; // stauf
+//				final double s11 =  12;
+//				
+				
+				
 				List<SensorReading> readings = Arrays.asList(
 						new SensorReading(now, SensorReadingType.FLOW_FILTERUNIT.name(), s0),
 						new SensorReading(now, SensorReadingType.FLOW_FILTER_DISCHARGE.name(), s1),
