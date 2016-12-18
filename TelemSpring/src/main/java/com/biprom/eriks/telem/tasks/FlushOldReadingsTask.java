@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class FlushOldReadingsTask {
 
 	@Autowired
-	SensorService measurementService;
+	SensorService sensorService;
 
 	@Scheduled(cron = "0 * 5 * * *")
 	public void flushOldReadings() {
-		measurementService.deleteOldMeasurements();
+		sensorService.deleteOldMeasurements();
 	}
 
 }

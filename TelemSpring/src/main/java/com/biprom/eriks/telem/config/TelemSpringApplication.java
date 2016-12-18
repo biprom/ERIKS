@@ -32,9 +32,6 @@ public class TelemSpringApplication {
 	@Value("${client}")
 	private String clientId;
 
-	@Value("${sensorfile}")
-	private String sensorFile;
-
 	public static void main(String[] args) {
 		SpringApplication.run(TelemSpringApplication.class, args);
 	}
@@ -59,6 +56,5 @@ public class TelemSpringApplication {
 	public KafkaTemplate<String, SensorReading> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
-
 
 }

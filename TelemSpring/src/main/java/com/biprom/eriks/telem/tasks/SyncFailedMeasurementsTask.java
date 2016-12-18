@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class SyncFailedMeasurementsTask {
 
 	@Autowired
-	SensorService measurementService;
+	SensorService sensorService;
 
 
 	/**
@@ -22,8 +22,8 @@ public class SyncFailedMeasurementsTask {
 	 */
 	@Scheduled(cron = "*/30 * * * * *")
 	public void retrySync() {
-		for (SensorReading m : measurementService.findUnsynchedMeasurements()) {
-			measurementService.sync(m);
+		for (SensorReading m : sensorService.findUnsynchedMeasurements()) {
+			sensorService.sync(m);
 		}
 	}
 }

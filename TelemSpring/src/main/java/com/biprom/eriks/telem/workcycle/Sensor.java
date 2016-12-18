@@ -2,25 +2,25 @@ package com.biprom.eriks.telem.workcycle;
 
 import com.biprom.eriks.telem.model.SensorReading;
 import com.biprom.eriks.telem.service.SensorService;
+import com.biprom.eriks.telem.workcycle.io.dummies.Dummy_ADC_PI_MCP;
+import com.biprom.eriks.telem.workcycle.io.impl.ADC_PI_MCP;
 import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static com.biprom.eriks.telem.workcycle.DummyMode.DUMMY_MODE;
+
 /**
  * @author Kristof Created on 12/10/16.
  */
-@Component
-@Scope("prototype")
+
 public class Sensor implements Runnable {
 
+	private static boolean run = true;
 
-	@Autowired
 	private SensorService sensorService;
 
 	/**
@@ -28,25 +28,34 @@ public class Sensor implements Runnable {
 	 */
 	private static final int SENSOR_FREQUENCY = 15 * 1000;
 
-	private static final long BUFFER_SIZE = 500000L;
-
 	public enum SensorReadingType {
 		FLOW_FILTERUNIT, FLOW_FILTER_DRAIN, PRESSURE_FILTERUNIT, TEMPERATURE_AFTER_PUMP, OIL_TEMPEARTURE_INLET, OIL_PRESSURE_INLET, PRESSURE_BEFORE_FILTERS, PRESSURE_AFTER_FILTERS, IS02micro, ISO5micro, ISO15micro, RH//
 	}
 
+
 	/**
 	 * Reading out sensor data from this card TODO Probably not correct
 	 */
-	ADC_PI_MCP analog_input_card_1_1 = new ADC_PI_MCP();
+	private ADC_PI_MCP analog_input_card_1_1 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
 
-	ADC_PI_MCP analog_input_card_2_1 = new ADC_PI_MCP();
+	private ADC_PI_MCP analog_input_card_2_1 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
 
-	ADC_PI_MCP analog_input_card_3_1 = new ADC_PI_MCP();
+	private ADC_PI_MCP analog_input_card_3_1 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
+
+
+	public Sensor(SensorService sensorService) {
+
+		this.sensorService = sensorService;
+	}
+
+	public void stop() {
+		run = false;
+	}
 
 
 	public void run() {
-		long test = 0;
-		while (!Thread.currentThread().isInterrupted()) {
+		System.out.println("STARTING SENSOR");
+		while (run) {
 			try {
 
 				// TODO: BRAM, Check of de KLOK altijd JUIST staat op de
