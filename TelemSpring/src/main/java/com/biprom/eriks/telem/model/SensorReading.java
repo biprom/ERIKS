@@ -1,8 +1,6 @@
 package com.biprom.eriks.telem.model;
 
 import com.google.gson.annotations.Expose;
-import io.mappedbus.MappedBusMessage;
-import io.mappedbus.MemoryMappedFile;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -10,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.nio.ByteBuffer;
 import java.util.Date;
 
 /**
@@ -18,7 +15,7 @@ import java.util.Date;
  *         Created on 06/10/16.
  */
 @Document(collection = "sensors")
-public class SensorReading implements MappedBusMessage {
+public class SensorReading {
 
 	@Id
 	@Expose
@@ -103,37 +100,4 @@ public class SensorReading implements MappedBusMessage {
 		this.source = source;
 	}
 
-	public void write(MemoryMappedFile mem, long pos) {
-		mem.putLong(pos, time.getTime());
-		mem.setBytes(pos + 8, toByteArray(value), 0, 8);
-		mem.putInt(pos + 8 + 8, type.getBytes().length);
-		mem.setBytes(pos + 8 + 8 + 4, type.getBytes(), 0, type.getBytes().length);
-	}
-
-	public void read(MemoryMappedFile mem, long pos) {
-		setTime(new Date(mem.getLong(pos)));
-
-		byte[] bytes = new byte[8];
-		mem.getBytes(pos + 8, bytes, 0, 8);
-		setValue(toDouble(bytes));
-
-		final int typeLength = mem.getInt(pos + 8 + 8);
-		byte[] typeBytes = new byte[typeLength];
-		mem.getBytes(pos + 8 + 8 + 4, typeBytes, 0, typeLength);
-		setType(new String(typeBytes));
-	}
-
-	public static byte[] toByteArray(double value) {
-		byte[] bytes = new byte[8];
-		ByteBuffer.wrap(bytes).putDouble(value);
-		return bytes;
-	}
-
-	public static double toDouble(byte[] bytes) {
-		return ByteBuffer.wrap(bytes).getDouble();
-	}
-
-	public int type() {
-		return 0;
-	}
 }
