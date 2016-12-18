@@ -19,20 +19,17 @@
     </vaadin-form-layout> 
     <vaadin-form-layout style-name="order-summary-layout" width="438px" margin-top="false" margin-bottom="false" _id="order_summary_layout"> 
      <vaadin-label style-name="header-label-small" size-auto plain-text _id="order_heading">
-       Total amount runtime hours 
+       Temperature Setpoint 
      </vaadin-label> 
      <vaadin-css-layout style-name="order-item" width="300px" _id="order_item"> 
       <vaadin-label style-name="order-label" width="260px" _id="order_label">
-        Runtime hours 
-       <br> h 389.00 
+        Min Temperature setpoint 
       </vaadin-label> 
-      <vaadin-native-button icon="fonticon://FontAwesome/f057" style-name="cancel-order-button" width="25px" height="25px" plain-text _id="cancel_order_button"></vaadin-native-button> 
-     </vaadin-css-layout> 
-     <vaadin-css-layout> 
-      <vaadin-label style-name="total-sum" _id="total_sum">
-        Total : 
-       <span class="order-sum"> $ 389.00</span> 
+      <vaadin-slider width="202px" _id="mintempSlider"></vaadin-slider> 
+      <vaadin-label style-name="order-label" width="260px" _id="order_label1">
+        Max Temperature setpoint 
       </vaadin-label> 
+      <vaadin-slider width="202px" _id="maxtempSlider"></vaadin-slider> 
      </vaadin-css-layout> 
     </vaadin-form-layout> 
    </vaadin-css-layout> 

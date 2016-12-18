@@ -6,7 +6,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.NativeButton;
+import com.vaadin.ui.Slider;
 import com.vaadin.ui.declarative.Design;
 
 /** 
@@ -30,8 +30,9 @@ public class StatisticsDesign extends CssLayout {
 	protected Label order_heading;
 	protected CssLayout order_item;
 	protected Label order_label;
-	protected NativeButton cancel_order_button;
-	protected Label total_sum;
+	protected Slider mintempSlider;
+	protected Label order_label1;
+	protected Slider maxtempSlider;
 
 	public StatisticsDesign() {
 		Design.read(this);
