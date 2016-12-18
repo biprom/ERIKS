@@ -9,9 +9,9 @@ public class TemperatureReading implements MappedBusMessage {
 	 */
 
 	
-	private int maxTemp;
+	private double maxTemp;
 	
-	private int minTemp;
+	private double minTemp;
 	
 	public TemperatureReading(int minTemp, int maxTemp){
 		this.minTemp = minTemp;
@@ -36,8 +36,8 @@ public class TemperatureReading implements MappedBusMessage {
 	
 	@Override
 	public void write(MemoryMappedFile mem, long pos) {
-		// TODO Auto-generated method stub
-
+		mem.setBytes(pos, toByteArray(minTemp), 0, 8);
+		mem.setBytes(pos+8, toByteArray(maxTemp), 0, 8);
 	}
 
 	@Override
