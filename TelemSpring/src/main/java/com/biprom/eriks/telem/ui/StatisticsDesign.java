@@ -7,7 +7,6 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeButton;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.declarative.Design;
 
 /** 
@@ -26,8 +25,6 @@ public class StatisticsDesign extends CssLayout {
 	protected CssLayout main_content_wrapper;
 	protected FormLayout billing_form;
 	protected Label email_header_label;
-	protected TextField company_field;
-	protected TextField city_field;
 	protected HorizontalLayout name_wrapper2;
 	protected FormLayout order_summary_layout;
 	protected Label order_heading;

@@ -32,13 +32,11 @@ public class OnlineDesign extends CssLayout {
 	protected Label statistics_label7;
 	protected Label statistics_label8;
 	protected Label statistics_label9;
-	protected Label statistics_label10;
 	protected CssLayout dashboard_item27;
 	protected Label dashboard_item_header3;
 	protected Label statistics_label18;
 	protected Label statistics_label12;
 	protected Label statistics_label16;
-	protected Label statistics_label17;
 	protected Label statistics_label19;
 
 	public OnlineDesign() {
