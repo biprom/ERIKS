@@ -87,19 +87,19 @@ public final class DashboardView extends Panel implements View,
         sparks.setWidth("100%");
         Responsive.makeResponsive(sparks);
 
-        SparklineChart s = new SparklineChart("Mobilie Filterunit 1", "bar", "P",
+        SparklineChart s = new SparklineChart("OSCA-SS103-2R", "bar", "P",
                 DummyDataGenerator.chartColors[0], 22, 20, 5);
         sparks.addComponent(s);
 
-        s = new SparklineChart("Mobilie Filterunit 2", "bar", "P",
+        s = new SparklineChart("SE400 MM+FREQ+I-count", "bar", "P",
                 DummyDataGenerator.chartColors[2], 8, 89, 6);
         sparks.addComponent(s);
 
-        s = new SparklineChart("Mobilie Filterunit 3", "bar", "P",
+        s = new SparklineChart("SE400 MM+FREQ+LPM", "bar", "P",
                 DummyDataGenerator.chartColors[3], 10, 30, 3);
         sparks.addComponent(s);
 
-        s = new SparklineChart("Mobilie Filterunit 4", "bar", "P",
+        s = new SparklineChart("Prototype Filterunit", "bar", "P",
                 DummyDataGenerator.chartColors[5], 50, 34, 4);
         sparks.addComponent(s);
 
