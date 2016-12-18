@@ -188,7 +188,7 @@ public class SalesView extends VerticalLayout implements View {
 				COLORS_ALPHA[colorIndex]);
 		timeline.setGraphCaption(dailyRevenueContainer, p);
 		timeline.setEventCaptionPropertyId("date");
-		timeline.setVerticalAxisLegendUnit(dailyRevenueContainer, "$");
+		timeline.setVerticalAxisLegendUnit(dailyRevenueContainer, "");
 	}
 
 	@Override

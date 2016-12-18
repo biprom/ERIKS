@@ -73,12 +73,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>caplogic</groupId>
-			<artifactId>mappedbus</artifactId>
-			<version>0.5</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>vaadin-charts</artifactId>
 			<version>3.0.0</version>
