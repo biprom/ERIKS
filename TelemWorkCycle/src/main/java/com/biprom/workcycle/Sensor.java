@@ -25,7 +25,7 @@ public class Sensor extends Thread {
 	private static final long BUFFER_SIZE = 500000L;
 
 	public enum SensorReadingType {
-		FLOW_FILTERUNIT, FLOW_FILTER_DISCHARGE, PRESSURE_FILTERUNIT, TEMPERATURE_AFTER_PUMP, OIL_TEMPEARTURE_INPUT, OIL_PRESSURE_INPUT, PRESSURE_BEFORE_FILTERS, PRESSURE_AFTER_FILTERS, NAS1, NAS2, NAS3, RH_OIL//
+		FLOW_FILTERUNIT, FLOW_FILTER_DRAIN, PRESSURE_FILTERUNIT, TEMPERATURE_AFTER_PUMP, OIL_TEMPEARTURE_INLET, OIL_PRESSURE_INLET, PRESSURE_BEFORE_FILTERS, PRESSURE_AFTER_FILTERS, IS02micro, ISO5micro, ISO15micro, RH//
 	}
 
 	/**
@@ -105,17 +105,17 @@ public class Sensor extends Thread {
 				
 				List<SensorReading> readings = Arrays.asList(
 						new SensorReading(now, SensorReadingType.FLOW_FILTERUNIT.name(), s0),
-						new SensorReading(now, SensorReadingType.FLOW_FILTER_DISCHARGE.name(), s1),
+						new SensorReading(now, SensorReadingType.FLOW_FILTER_DRAIN.name(), s1),
 						new SensorReading(now, SensorReadingType.PRESSURE_FILTERUNIT.name(), s2),
 						new SensorReading(now, SensorReadingType.TEMPERATURE_AFTER_PUMP.name(), s3),
-						new SensorReading(now, SensorReadingType.OIL_TEMPEARTURE_INPUT.name(), s4),
-						new SensorReading(now, SensorReadingType.OIL_PRESSURE_INPUT.name(), s5),
+						new SensorReading(now, SensorReadingType.OIL_TEMPEARTURE_INLET.name(), s4),
+						new SensorReading(now, SensorReadingType.OIL_PRESSURE_INLET.name(), s5),
 						new SensorReading(now, SensorReadingType.PRESSURE_BEFORE_FILTERS.name(), s6),
 						new SensorReading(now, SensorReadingType.PRESSURE_AFTER_FILTERS.name(), s7),
-						new SensorReading(now, SensorReadingType.NAS1.name(), s8),
-						new SensorReading(now, SensorReadingType.NAS2.name(), s9),
-						new SensorReading(now, SensorReadingType.NAS3.name(), s10),
-						new SensorReading(now, SensorReadingType.RH_OIL.name(), s11));
+						new SensorReading(now, SensorReadingType.IS02micro.name(), s8),
+						new SensorReading(now, SensorReadingType.ISO5micro.name(), s9),
+						new SensorReading(now, SensorReadingType.ISO15micro.name(), s10),
+						new SensorReading(now, SensorReadingType.RH.name(), s11));
 
 				for (SensorReading reading : readings) {
 					try {

@@ -99,7 +99,7 @@ public class WorkCycle extends Thread {
 				//inlezen analoge ingangen
 				
 				
-				System.out.println("flow 18 : "+analog_input_card_1.read_raw(0X6C, 0, 1, 0, 0)); 
+				System.out.println("flow 18 : "+(analog_input_card_1.read_raw(0X6C, 0, 1, 0, 0)*0.05456766)); 
 				System.out.println("flow 29 : "+analog_input_card_1.read_raw(0X6C, 1, 1, 0, 0));
 				System.out.println("eds 13 : "+((0.19*(analog_input_card_1.read_raw(0X6C, 2, 0, 1, 0)-736))));
 				
@@ -117,10 +117,10 @@ public class WorkCycle extends Thread {
 				sensor20 = ((0.62/186)*analog_input_card_2.read_raw(0X6D, 3, 0, 1, 0)-2.4333);
 				System.out.println("P 20 : "+ sensor20);
 				
-				System.out.println("stauf : NAS 1 : "+analog_input_card_3.read_raw(0X6E, 0, 1, 0, 0)); 
-				System.out.println("stauf : NAS 2 : "+analog_input_card_3.read_raw(0X6E, 1, 1, 0, 0));
-				System.out.println("stauf : NAS 3 : "+analog_input_card_3.read_raw(0X6E, 2, 1, 0, 0));
-				System.out.println("RH Olie : "+analog_input_card_3.read_raw(0X6E, 3, 1, 0, 0)/28.431);
+				System.out.println("stauf : NAS 1 : "+(((((11.179/2047)*analog_input_card_3.read_raw(0X6E, 0, 0, 0, 0)))*3)-3)); 
+				System.out.println("stauf : NAS 2 : "+(((((11.179/2047)*analog_input_card_3.read_raw(0X6E, 1, 0, 0, 0)))*3)-3));
+				System.out.println("stauf : NAS 3 : "+(((((11.179/2047)*analog_input_card_3.read_raw(0X6E, 2, 0, 0, 0)))*3)-3));
+				System.out.println("RH Olie : "+((((11.179/2047)*analog_input_card_3.read_raw(0X6E, 3, 0, 0, 0))-1.0)/0.08));
 				
 
 				

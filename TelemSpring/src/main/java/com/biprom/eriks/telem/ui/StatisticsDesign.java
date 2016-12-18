@@ -26,12 +26,6 @@ public class StatisticsDesign extends CssLayout {
 	protected CssLayout main_content_wrapper;
 	protected FormLayout billing_form;
 	protected Label email_header_label;
-	protected TextField email_field;
-	protected Label address_label;
-	protected HorizontalLayout name_wrapper;
-	protected TextField firstname_field;
-	protected TextField lastname_field;
-	protected TextField address_field;
 	protected TextField company_field;
 	protected TextField city_field;
 	protected HorizontalLayout name_wrapper2;
@@ -40,7 +34,6 @@ public class StatisticsDesign extends CssLayout {
 	protected CssLayout order_item;
 	protected Label order_label;
 	protected NativeButton cancel_order_button;
-	protected Label tax_sum;
 	protected Label total_sum;
 
 	public StatisticsDesign() {
