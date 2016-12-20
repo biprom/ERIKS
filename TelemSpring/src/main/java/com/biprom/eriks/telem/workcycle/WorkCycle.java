@@ -125,6 +125,7 @@ public class WorkCycle implements Runnable {
 	// druk op filterelement waarschuwing
 	// -0.1 bar onderdruk op filterelement drainventing open
 	// (fout 8)
+	double edsTotaalDrukSysteem;
 
 
 	public void run() {
@@ -137,7 +138,9 @@ public class WorkCycle implements Runnable {
 
 				System.out.println("flow 18 : " + (analog_input_card_1.read_raw(0X6C, 0, 1, 0, 0) * 0.05456766));
 				System.out.println("flow 29 : " + analog_input_card_1.read_raw(0X6C, 1, 1, 0, 0));
-				System.out.println("eds 13 : " + ((0.19 * (analog_input_card_1.read_raw(0X6C, 2, 0, 1, 0) - 736))));
+				edsTotaalDrukSysteem = ((0.19 * (analog_input_card_1.read_raw(0X6C, 2, 0, 1, 0) - 736)));
+				
+				System.out.println("eds 13 : " + edsTotaalDrukSysteem);
 
 				temp_olie = (((analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0)) - 365.04) / 19.16);
 				System.out.println("temp olie aanzuig: " + temp_olie);
@@ -283,6 +286,15 @@ public class WorkCycle implements Runnable {
 				standby();
 				status = Status.STANDBY;
 			}
+			
+			
+			if (edsTotaalDrukSysteem > 5) {
+				System.out.println("ERROR : Totaaldruk > 5bar");
+				error = Error.SENSOR3_HOOG;
+
+				standby();
+				status = Status.STANDBY;
+			}
 
 
 			if (temp_olie > 80) {
@@ -388,12 +400,12 @@ public class WorkCycle implements Runnable {
 		roodDrainnage = true;
 		schakelklep_draintank_open = true;
 		schakelklep_draintank_sluiten = false;
-		try {
+		/*try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		leegpompmotor_26 = true;
 
 		System.out.println("functie leegpompen gestart");
@@ -461,8 +473,8 @@ public class WorkCycle implements Runnable {
 		klep_23 = false;
 		sensor_29_flowmeter = false; // na aantal seconden motor 26 afslaan spoel 19
 		klep_19 = false; // bekrachtigen tijdens filterwissel
-
-
+		verwarming_olie = false; //olie mag niet worden verwarmd in standby
+	
 	}
 
 
@@ -486,8 +498,8 @@ public class WorkCycle implements Runnable {
 		digital_output_card_1.d1.setState(!koeling_motor_9);
 		digital_output_card_1.d2.setState(!koeling_motor_9);
 		digital_output_card_1.d3.setState(!leegpompmotor_26);
-		digital_output_card_1.d4.setState(!schakelklep_draintank_open);
-		digital_output_card_1.d5.setState(!schakelklep_draintank_sluiten);
+		digital_output_card_1.d4.setState(!schakelklep_draintank_sluiten);
+		digital_output_card_1.d5.setState(!schakelklep_draintank_open);
 		digital_output_card_1.d6.setState(!schakelklep_drainfilter_open);
 		digital_output_card_1.d7.setState(!schakelklep_drainfilter_sluiten);
 		digital_output_card_1.d8.setState(!klepNC28);

@@ -6,5 +6,5 @@ package com.biprom.eriks.telem.workcycle;
  */
 public class DummyMode {
 
-	public static final Boolean DUMMY_MODE = Boolean.TRUE;
+	public static final Boolean DUMMY_MODE = Boolean.FALSE;
 }

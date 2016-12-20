@@ -80,7 +80,7 @@ public class Sensor implements Runnable {
 				// 20
 				final double s8 = (((((11.179 / 2047) * analog_input_card_3_1.read_raw(0X6E, 0, 0, 0, 0))) * 3) - 3); // stauf
 				// nas1
-				final double s9 = (analog_input_card_3_1.read_raw(0X6E, 1, 1, 0, 0) / 155.636); // stauf
+				final double s9 =(((((11.179 / 2047) * analog_input_card_3_1.read_raw(0X6E, 1, 0, 0, 0))) * 3) - 3); // stauf
 				// nas
 				// 2
 				final double s10 = (((((11.179 / 2047) * analog_input_card_3_1.read_raw(0X6E, 2, 0, 0, 0))) * 3) - 3); // stauf
