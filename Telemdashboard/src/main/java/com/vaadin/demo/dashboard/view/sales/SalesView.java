@@ -175,9 +175,9 @@ public class SalesView extends VerticalLayout implements View {
 		ListContainer<MeasuredValues> dailyRevenueContainer = new TempMovieRevenuesContainer(
 				dailyRevenue);
 
+
 		dailyRevenueContainer.sort(new Object[]{"timestamp"},
 				new boolean[]{true});
-
 		timeline.addGraphDataSource(dailyRevenueContainer, "timestamp",
 				"value");
 		colorIndex = (colorIndex >= COLORS.length - 1 ? 0 : ++colorIndex);

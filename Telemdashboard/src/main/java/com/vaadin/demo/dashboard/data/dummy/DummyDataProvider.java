@@ -38,8 +38,6 @@ public class DummyDataProvider implements DataProvider {
 
 	static List<Parameters> parameters = new ArrayList<Parameters>();
 
-	static List<MeasuredValues> measuredValues = new ArrayList<MeasuredValues>();
-
 
 	private final Collection<DashboardNotification> notifications = DummyDataGenerator
 			.randomNotifications();
@@ -214,6 +212,8 @@ public class DummyDataProvider implements DataProvider {
 		MongoCollection<Document> collection = database.getCollection("sensors");
 //		System.out.println("Aantal documents in measuredValues- collection: " + collection.count());
 		MongoCursor<Document> cursor = collection.find(new BasicDBObject("t", par)).iterator();
+
+		List<MeasuredValues> measuredValues = new ArrayList<MeasuredValues>();
 
 
 		try {
