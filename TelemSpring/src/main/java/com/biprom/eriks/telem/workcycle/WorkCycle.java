@@ -19,7 +19,7 @@ public class WorkCycle implements Runnable {
 
 	private static boolean run = true;
 
-
+	//extra lijntje commentaar
 	//Initialisatie digitale outputs
 	DigOutput digital_output_card_1 = DUMMY_MODE ? new DummyDigOut() : new DigOutput_PCF(1, 0X20);
 
