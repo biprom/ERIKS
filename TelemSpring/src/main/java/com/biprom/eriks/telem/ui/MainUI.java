@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringUI
 @Theme("mytheme")
 public class MainUI extends UI {
-
+	//commentaar
 	private Navigator navigator;
 
 	@Autowired
