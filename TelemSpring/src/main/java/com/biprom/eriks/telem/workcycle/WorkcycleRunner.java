@@ -13,7 +13,6 @@ import javax.annotation.PreDestroy;
 @Service
 public class WorkcycleRunner {
 
-
 	private Thread thread;
 
 	WorkCycle wc;
@@ -21,6 +20,10 @@ public class WorkcycleRunner {
 	public WorkcycleRunner() {
 		wc = new WorkCycle();
 		thread = new Thread(wc);
+	}
+	
+	public void setTemperatureMinMax(Double min, Double max){
+		wc.setTempMinMax(min, max);
 	}
 
 	@PostConstruct
@@ -33,5 +36,17 @@ public class WorkcycleRunner {
 		if (wc != null) {
 			wc.stop();
 		}
+	}
+
+	public Double getMaxTempValue() {
+		return wc.getMaxTemp();
+	}
+
+	public Double getMinTempValue() {
+		return wc.getMinTemp();
+	}
+	
+	public boolean isRunning(){
+		return wc.isRunning();
 	}
 }

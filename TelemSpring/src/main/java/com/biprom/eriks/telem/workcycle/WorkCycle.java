@@ -19,28 +19,25 @@ public class WorkCycle implements Runnable {
 
 	private static boolean run = true;
 
-	//extra lijntje commentaar
-	//Initialisatie digitale outputs
+	// Initialisatie digitale outputs
 	DigOutput digital_output_card_1 = DUMMY_MODE ? new DummyDigOut() : new DigOutput_PCF(1, 0X20);
 
 	DigOutput digital_output_card_2 = DUMMY_MODE ? new DummyDigOut() : new DigOutput_PCF(1, 0X21);
 
-	//initialisatie digitale inputs
+	// initialisatie digitale inputs
 	DigInput digital_input_card_1 = DUMMY_MODE ? new DummyDigInput() : new DigInput_PCF(1, 0X22, "cardnr1");
-	//DigInput_PCF digital_input_card_2 = new DigInput_PCF(1, 0X23, "cardnr2");
+	// DigInput_PCF digital_input_card_2 = new DigInput_PCF(1, 0X23, "cardnr2");
 
-	//initialisatie analoge inputs
+	// initialisatie analoge inputs
 	private ADC_PI_MCP analog_input_card_1 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
 
 	private ADC_PI_MCP analog_input_card_2 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
 
 	private ADC_PI_MCP analog_input_card_3 = DUMMY_MODE ? new Dummy_ADC_PI_MCP() : new ADC_PI_MCP();
 
-
 	public void stop() {
 		run = false;
 	}
-
 
 	// status werking filterunit
 	public enum Status {
@@ -127,25 +124,24 @@ public class WorkCycle implements Runnable {
 	// (fout 8)
 	double edsTotaalDrukSysteem;
 
-
 	public void run() {
 		System.out.println("Starting WORKCYCLE");
 		while (run) {
 			try {
 
-				//inlezen analoge ingangen
-
+				// inlezen analoge ingangen
 
 				System.out.println("flow 18 : " + (analog_input_card_1.read_raw(0X6C, 0, 1, 0, 0) * 0.05456766));
 				System.out.println("flow 29 : " + analog_input_card_1.read_raw(0X6C, 1, 1, 0, 0));
 				edsTotaalDrukSysteem = ((0.19 * (analog_input_card_1.read_raw(0X6C, 2, 0, 1, 0) - 736)));
-				
+
 				System.out.println("eds 13 : " + edsTotaalDrukSysteem);
 
 				temp_olie = (((analog_input_card_1.read_raw(0X6C, 3, 1, 0, 0)) - 365.04) / 19.16);
 				System.out.println("temp olie aanzuig: " + temp_olie);
 
-				System.out.println("temp 03 : " + (((analog_input_card_2.read_raw(0X6D, 0, 1, 0, 0)) - 365.04) / 19.16));
+				System.out
+						.println("temp 03 : " + (((analog_input_card_2.read_raw(0X6D, 0, 1, 0, 0)) - 365.04) / 19.16));
 
 				sensor4 = ((0.62 / 186) * analog_input_card_2.read_raw(0X6D, 1, 0, 1, 0) - 2.4333);
 				System.out.println("aanzuigdruk- sensor 04 : " + sensor4);
@@ -156,11 +152,14 @@ public class WorkCycle implements Runnable {
 				sensor20 = ((0.62 / 186) * analog_input_card_2.read_raw(0X6D, 3, 0, 1, 0) - 2.4333);
 				System.out.println("P 20 : " + sensor20);
 
-				System.out.println("stauf : NAS 1 : " + (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 0, 0, 0, 0))) * 3) - 3));
-				System.out.println("stauf : NAS 2 : " + (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 1, 0, 0, 0))) * 3) - 3));
-				System.out.println("stauf : NAS 3 : " + (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 2, 0, 0, 0))) * 3) - 3));
-				System.out.println("RH Olie : " + ((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 3, 0, 0, 0)) - 1.0) / 0.08));
-
+				System.out.println("stauf : NAS 1 : "
+						+ (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 0, 0, 0, 0))) * 3) - 3));
+				System.out.println("stauf : NAS 2 : "
+						+ (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 1, 0, 0, 0))) * 3) - 3));
+				System.out.println("stauf : NAS 3 : "
+						+ (((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 2, 0, 0, 0))) * 3) - 3));
+				System.out.println("RH Olie : "
+						+ ((((11.179 / 2047) * analog_input_card_3.read_raw(0X6E, 3, 0, 0, 0)) - 1.0) / 0.08));
 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -170,13 +169,11 @@ public class WorkCycle implements Runnable {
 				e1.printStackTrace();
 			}
 
-
 			setInputsToVariables();
 
 			if (status == Status.STANDBY) {
 				System.out.println("system is in STANDBY MODE");
 				standby();
-
 
 				// luisteren naar AAN/UIT knop
 				if (aan_uit_knop == true) {
@@ -185,19 +182,17 @@ public class WorkCycle implements Runnable {
 
 				}
 
-
 			}
 
 			if (status == Status.BEDRIJF && error == Error.OK) {
 				System.out.println("system is in BEDRIJFS MODE");
 
-				//schakel installatie in
+				// schakel installatie in
 				bedrijf();
 
+				// voorwaarden zonder in ERROR te gaan
 
-				//voorwaarden zonder in ERROR te gaan
-
-				//leegpompen hoog pijlglas
+				// leegpompen hoog pijlglas
 
 				if (niv_hoog_peilstok == true) {
 					System.out.println("LEEGPOMPEN START PARALLELWERKING");
@@ -205,23 +200,23 @@ public class WorkCycle implements Runnable {
 
 				}
 
+				// leeglopen hoog pijlstok, zal leegpompten met machine uit te
+				// schakelen (auto opstart !!!)
 
-				//leeglopen hoog pijlstok, zal leegpompten met machine uit te schakelen (auto opstart !!!)
-
-//				if (niv_hoog_peilstok == true) {
-//					System.out.println(" pijlstok 1 te hoog");								
-//					standby();
-//					
-//					try {
-//						Thread.sleep(1000);
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
-//					leegpompen_Start();
-//						
-//				}
+				// if (niv_hoog_peilstok == true) {
+				// System.out.println(" pijlstok 1 te hoog");
+				// standby();
+				//
+				// try {
+				// Thread.sleep(1000);
+				// } catch (InterruptedException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				//
+				// leegpompen_Start();
+				//
+				// }
 
 				if (niv_laag_peilglas == false) {
 					System.out.println("LEEGPOMPEN STOP");
@@ -229,8 +224,7 @@ public class WorkCycle implements Runnable {
 
 				}
 
-
-				//kan terug keren naar standby via drukknop
+				// kan terug keren naar standby via drukknop
 				if (aan_uit_knop == false) {
 					System.out.println("KNOP POSITIE UIT");
 					status = Status.STANDBY;
@@ -239,8 +233,7 @@ public class WorkCycle implements Runnable {
 
 			}
 
-
-			//elke scan controle van filters en errors
+			// elke scan controle van filters en errors
 
 			if (sensor13 - sensor20 >= 3 && sensor13 - sensor20 < 4) {
 				System.out.println("Aanraden filters te verwisselen");
@@ -256,9 +249,7 @@ public class WorkCycle implements Runnable {
 
 			}
 
-
 			if (status == Status.FILTERWISSEL && leegpompmotor_26 == true && sensor_29_flowmeter == false) {
-
 
 				filterwissel_Stop();
 				System.out.println("system is FILTERWISSEL MODE gestopt");
@@ -268,7 +259,6 @@ public class WorkCycle implements Runnable {
 				}
 
 			}
-
 
 			if (sensor4 < -0.2) {
 				System.out.println("ERROR : sensor 4 < 0.2 bar");
@@ -286,8 +276,7 @@ public class WorkCycle implements Runnable {
 				standby();
 				status = Status.STANDBY;
 			}
-			
-			
+
 			if (edsTotaalDrukSysteem > 5) {
 				System.out.println("ERROR : Totaaldruk > 5bar");
 				error = Error.SENSOR3_HOOG;
@@ -295,7 +284,6 @@ public class WorkCycle implements Runnable {
 				standby();
 				status = Status.STANDBY;
 			}
-
 
 			if (temp_olie > 80) {
 				System.out.println("ERROR : temp olie > 80°C");
@@ -313,7 +301,6 @@ public class WorkCycle implements Runnable {
 				status = Status.STANDBY;
 			}
 
-
 			if (error != Error.OK) {
 				roodAlarm = true;
 			} else {
@@ -322,10 +309,9 @@ public class WorkCycle implements Runnable {
 			}
 
 			if (reset_drukknop == true) {
-				//probeer error te resetten
+				// probeer error te resetten
 				error = Error.OK;
 			}
-
 
 			setOutputsToVariables();
 
@@ -337,7 +323,6 @@ public class WorkCycle implements Runnable {
 			}
 		}
 	}
-
 
 	private void filterwissel_Start() {
 		// Motor 9 uitschakelen, verwarmingselement 10 uit, na 3 sec klep 17 en
@@ -390,8 +375,8 @@ public class WorkCycle implements Runnable {
 		klep_23 = false;
 		klep_19 = false;
 
-		//oranjeFilterwisselOK = false;
-		//oranjeFilterVervuild = false;
+		// oranjeFilterwisselOK = false;
+		// oranjeFilterVervuild = false;
 	}
 
 	private void leegpompen_Start() {
@@ -400,12 +385,10 @@ public class WorkCycle implements Runnable {
 		roodDrainnage = true;
 		schakelklep_draintank_open = true;
 		schakelklep_draintank_sluiten = false;
-		/*try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { Thread.sleep(3000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		leegpompmotor_26 = true;
 
 		System.out.println("functie leegpompen gestart");
@@ -425,7 +408,7 @@ public class WorkCycle implements Runnable {
 	private void bedrijf() {
 		// opstart sequentie filterunit
 		// opstart unit 17 28 + 09
-		//plaats groen lampje aan
+		// plaats groen lampje aan
 		groenBedrijf = true;
 
 		klepNC17 = true;
@@ -449,6 +432,7 @@ public class WorkCycle implements Runnable {
 
 		// opstart verwarmen olie
 
+		System.out.println("temp: " + temp_olie_min + ", " + temp_olie_max);
 		if (temp_olie <= temp_olie_min) {
 			verwarming_olie = true;
 		}
@@ -458,9 +442,14 @@ public class WorkCycle implements Runnable {
 
 	}
 
+	public void setTempMinMax(double min, double max) {
+		this.temp_olie_min = min;
+		this.temp_olie_max = max;
+	}
+
 	private void standby() {
 		// afsluit sequentie filterunit
-		//groen lampje bedrijf afleggen
+		// groen lampje bedrijf afleggen
 
 		groenBedrijf = false;
 		klepNC17 = false; // wordt geschakeld tijdens opstart
@@ -471,50 +460,64 @@ public class WorkCycle implements Runnable {
 		schakelklep_draintank_sluiten = true;
 		leegpompmotor_26 = false; // actie ifv peilglas en bij filterwissel
 		klep_23 = false;
-		sensor_29_flowmeter = false; // na aantal seconden motor 26 afslaan spoel 19
+		sensor_29_flowmeter = false; // na aantal seconden motor 26 afslaan
+										// spoel 19
 		klep_19 = false; // bekrachtigen tijdens filterwissel
-		verwarming_olie = false; //olie mag niet worden verwarmd in standby
-	
+		verwarming_olie = false; // olie mag niet worden verwarmd in standby
+
 	}
 
-
-	//funtie setten van inputs tijdens start van loop
+	// funtie setten van inputs tijdens start van loop
 
 	private void setInputsToVariables() {
 
-//		digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_00);
-//		digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_01);
+		// digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_00);
+		// digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_01);
 		reset_drukknop = !(digital_input_card_1.getState(PCF8574Pin.GPIO_02).getValue() != 0);
 		niv_hoog_peilstok = !(digital_input_card_1.getState(PCF8574Pin.GPIO_03).getValue() != 0);
 		System.out.println("niveau pijlstok hoog : " + niv_hoog_peilstok);
 		niv_hoog_peilglas = !(digital_input_card_1.getState(PCF8574Pin.GPIO_04).getValue() != 0);
 		niv_laag_peilglas = !(digital_input_card_1.getState(PCF8574Pin.GPIO_05).getValue() != 0);
 		System.out.println("niveau pijglas laag : " + niv_laag_peilglas);
-		//	aan_uit_knop = !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_06).getValue() != 0);
+		// aan_uit_knop =
+		// !(digital_input_card_1.providerReader.getState(PCF8574Pin.GPIO_06).getValue()
+		// != 0);
 		aan_uit_knop = !(digital_input_card_1.getState(PCF8574Pin.GPIO_07).getValue() != 0);
 	}
 
 	private void setOutputsToVariables() {
-		digital_output_card_1.d1.setState(!koeling_motor_9);
-		digital_output_card_1.d2.setState(!koeling_motor_9);
-		digital_output_card_1.d3.setState(!leegpompmotor_26);
-		digital_output_card_1.d4.setState(!schakelklep_draintank_sluiten);
-		digital_output_card_1.d5.setState(!schakelklep_draintank_open);
-		digital_output_card_1.d6.setState(!schakelklep_drainfilter_open);
-		digital_output_card_1.d7.setState(!schakelklep_drainfilter_sluiten);
-		digital_output_card_1.d8.setState(!klepNC28);
+		try {
+			digital_output_card_1.d1.setState(!koeling_motor_9);
+			digital_output_card_1.d2.setState(!koeling_motor_9);
+			digital_output_card_1.d3.setState(!leegpompmotor_26);
+			digital_output_card_1.d4.setState(!schakelklep_draintank_sluiten);
+			digital_output_card_1.d5.setState(!schakelklep_draintank_open);
+			digital_output_card_1.d6.setState(!schakelklep_drainfilter_open);
+			digital_output_card_1.d7.setState(!schakelklep_drainfilter_sluiten);
+			digital_output_card_1.d8.setState(!klepNC28);
 
-		digital_output_card_2.d1.setState(!klep_19);
-		digital_output_card_2.d2.setState(!klep_19);
-		digital_output_card_2.d3.setState(!groenBedrijf);
-		digital_output_card_2.d4.setState(!oranjeFilterwisselOK);
-		digital_output_card_2.d5.setState(!oranjeFilterVervuild);
-		digital_output_card_2.d6.setState(!roodAlarm);
-		digital_output_card_2.d7.setState(!roodDrainnage);
-		digital_output_card_2.d8.setState(!verwarming_olie);
-
+			digital_output_card_2.d1.setState(!klep_19);
+			digital_output_card_2.d2.setState(!klep_19);
+			digital_output_card_2.d3.setState(!groenBedrijf);
+			digital_output_card_2.d4.setState(!oranjeFilterwisselOK);
+			digital_output_card_2.d5.setState(!oranjeFilterVervuild);
+			digital_output_card_2.d6.setState(!roodAlarm);
+			digital_output_card_2.d7.setState(!roodDrainnage);
+			digital_output_card_2.d8.setState(!verwarming_olie);
+		} catch (Exception e) {
+		}
 
 	}
 
+	public Double getMaxTemp() {
+		return temp_olie_max;
+	}
 
+	public Double getMinTemp() {
+		return temp_olie_min;
+	}
+
+	public boolean isRunning(){
+		return aan_uit_knop;
+	}
 }

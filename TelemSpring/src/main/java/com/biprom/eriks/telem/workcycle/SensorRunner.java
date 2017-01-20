@@ -14,14 +14,14 @@ import javax.annotation.PreDestroy;
 @Service
 public class SensorRunner {
 
-
+	
 	private Thread thread;
 
 	Sensor sensor;
 
 	@Autowired
-	public SensorRunner(SensorService sensorService) {
-		sensor = new Sensor(sensorService);
+	public SensorRunner(SensorService sensorService, WorkcycleRunner wc) {
+		sensor = new Sensor(sensorService, wc);
 		thread = new Thread(sensor);
 	}
 
