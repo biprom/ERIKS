@@ -52,9 +52,10 @@ public class SalesView extends VerticalLayout implements View {
 
 		initMovieSelect();
 		// Add first 2 by default
-		List<String> subList = new ArrayList<String>(DashboardUI
-				.getDataProvider().getParameters()).subList(0, 1);
-		for (String p : subList) {
+
+		List<String> defaultParamlist = Arrays.asList("ISO2micro", "ISO5micro", "ISO15micro");
+
+		for (String p : defaultParamlist) {
 			addDataSet(p);
 		}
 
@@ -67,20 +68,8 @@ public class SalesView extends VerticalLayout implements View {
 
 	private void initMovieSelect() {
 		Collection<String> paras = DashboardUI.getDataProvider().getParameters();
-
-//		Parameters testpara = new Parameters();
-//
-//		for (Iterator<String> iterator = paras.iterator(); iterator.hasNext(); ) {
-//			testpara = (Parameters) iterator.next();
-//			System.out.println("Doorgegeven ID : " + testpara.get_id());
-//			System.out.println("Doorgegeven PARA : " + testpara.getTitle());
-//		}
-
-
-		Container movieContainer = new ListContainer<String>(String.class, paras);
-
-		parameterSelect.setContainerDataSource(movieContainer);
-
+		Container paramContainer = new ListContainer<String>(String.class, paras);
+		parameterSelect.setContainerDataSource(paramContainer);
 	}
 
 	private Component buildHeader() {

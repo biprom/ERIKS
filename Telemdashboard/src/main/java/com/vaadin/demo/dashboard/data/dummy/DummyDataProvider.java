@@ -7,7 +7,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -79,7 +80,7 @@ public class DummyDataProvider implements DataProvider {
 	 */
 	private static Collection<String> loadCollectionData() {
 
-		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://eriks.liquinno.com:27017"));
+		MongoClient mongoClient = getMongoClient();
 		MongoDatabase database = mongoClient.getDatabase("eriksdashboard");
 		MongoCollection<Document> collection = database.getCollection("sensors");
 //		System.out.println("Aantal documents in parameters- collection: " + collection.count());
@@ -206,10 +207,10 @@ public class DummyDataProvider implements DataProvider {
 
 	@Override
 	public Collection<MeasuredValues> fetchParaMeasuredValues(String par) {
-
-		MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://eriks.liquinno.com:27017"));
-		MongoDatabase database = mongoClient.getDatabase("eriksdashboard");
+		final MongoClient mongoClient = getMongoClient();
+		final MongoDatabase database = mongoClient.getDatabase("eriksdashboard");
 		MongoCollection<Document> collection = database.getCollection("sensors");
+
 //		System.out.println("Aantal documents in measuredValues- collection: " + collection.count());
 		MongoCursor<Document> cursor = collection.find(new BasicDBObject("t", par)).iterator();
 
@@ -253,6 +254,21 @@ public class DummyDataProvider implements DataProvider {
 	public Movie getMovie(long movieId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	// TODO FIX THIS, DON'T STORE PASSWORDS IN CODE!!!!!
+	private static MongoClient getMongoClient() {
+		List<MongoCredential> credentials = new ArrayList<MongoCredential>();
+		credentials.add(
+				MongoCredential.createMongoCRCredential(
+						"eriks_user",
+						"eriksdashboard",
+						"xVP3VibxPWE".toCharArray()
+				)
+		);
+		List<ServerAddress> seeds = new ArrayList<ServerAddress>();
+		seeds.add(new ServerAddress("localhost"));
+		return new MongoClient(seeds, credentials);
 	}
 
 
