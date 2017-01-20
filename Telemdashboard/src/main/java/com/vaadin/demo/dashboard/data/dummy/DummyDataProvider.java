@@ -263,7 +263,7 @@ public class DummyDataProvider implements DataProvider {
 				MongoCredential.createMongoCRCredential(
 						"eriks_user",
 						"eriksdashboard",
-						"xVP3Vi~/b*x`P\\WE".toCharArray()
+						"xVP3VibxPWE".toCharArray()
 				)
 		);
 		List<ServerAddress> seeds = new ArrayList<ServerAddress>();
