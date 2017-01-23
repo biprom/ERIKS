@@ -260,7 +260,7 @@ public class DummyDataProvider implements DataProvider {
 	private static MongoClient getMongoClient() {
 		List<MongoCredential> credentials = new ArrayList<MongoCredential>();
 		credentials.add(
-				MongoCredential.createMongoCRCredential(
+				MongoCredential.createScramSha1Credential(
 						"eriks_user",
 						"eriksdashboard",
 						"xVP3VibxPWE".toCharArray()

@@ -8,7 +8,7 @@ import com.vaadin.server.Resource;
 
 public enum DashboardViewType {
     DASHBOARD("dashboard", DashboardView.class, FontAwesome.HOME, true), SALES(
-            "sales", SalesView.class, FontAwesome.BAR_CHART_O, false);
+            "Graph", SalesView.class, FontAwesome.BAR_CHART_O, false);
 
     private final String viewName;
     private final Class<? extends View> viewClass;
