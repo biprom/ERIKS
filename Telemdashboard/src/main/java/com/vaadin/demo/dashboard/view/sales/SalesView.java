@@ -53,7 +53,7 @@ public class SalesView extends VerticalLayout implements View {
 		initMovieSelect();
 		// Add first 2 by default
 
-		List<String> defaultParamlist = Arrays.asList("ISO2micro", "ISO5micro", "ISO15micro");
+		List<String> defaultParamlist = Arrays.asList("ISO4micro", "ISO6micro", "ISO14micro");
 
 		for (String p : defaultParamlist) {
 			addDataSet(p);
