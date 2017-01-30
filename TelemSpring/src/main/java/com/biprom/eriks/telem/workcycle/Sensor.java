@@ -31,7 +31,7 @@ public class Sensor implements Runnable {
 	private static final int SENSOR_FREQUENCY = 15 * 1000;
 
 	public enum SensorReadingType {
-		FLOW_FILTERUNIT, FLOW_FILTER_DRAIN, PRESSURE_FILTERUNIT, TEMPERATURE_AFTER_PUMP, OIL_TEMPEARTURE_INLET, OIL_PRESSURE_INLET, PRESSURE_BEFORE_FILTERS, PRESSURE_AFTER_FILTERS, ISO2micro, ISO5micro, ISO15micro, RH//
+		FLOW_FILTERUNIT, FLOW_FILTER_DRAIN, PRESSURE_FILTERUNIT, TEMPERATURE_AFTER_PUMP, OIL_TEMPEARTURE_INLET, OIL_PRESSURE_INLET, PRESSURE_BEFORE_FILTERS, PRESSURE_AFTER_FILTERS, ISO4micro, ISO6micro, ISO14micro, RH//
 	}
 
 	/**
@@ -123,9 +123,9 @@ public class Sensor implements Runnable {
 							new SensorReading(now, SensorReadingType.OIL_PRESSURE_INLET.name(), s5),
 							new SensorReading(now, SensorReadingType.PRESSURE_BEFORE_FILTERS.name(), s6),
 							new SensorReading(now, SensorReadingType.PRESSURE_AFTER_FILTERS.name(), s7),
-							new SensorReading(now, SensorReadingType.ISO2micro.name(), s8),
-							new SensorReading(now, SensorReadingType.ISO5micro.name(), s9),
-							new SensorReading(now, SensorReadingType.ISO15micro.name(), s10),
+							new SensorReading(now, SensorReadingType.ISO4micro.name(), s8),
+							new SensorReading(now, SensorReadingType.ISO6micro.name(), s9),
+							new SensorReading(now, SensorReadingType.ISO14micro.name(), s10),
 							new SensorReading(now, SensorReadingType.RH.name(), s11));
 
 					for (SensorReading reading : readings) {
